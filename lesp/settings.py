@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,9 +44,16 @@ PROJECT_APPS = [
     'apps.usuario',
     'apps.documentos',
     'apps.inicio',
+    'apps.almacen',
+    'apps.home',
+    'apps.login',
 ]
 
-INSTALLED_APPS = CORE_APPS + PROJECT_APPS
+EXTERNAL_APPS = [
+    'widget_tweaks',
+]
+
+INSTALLED_APPS = CORE_APPS + PROJECT_APPS + EXTERNAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -138,3 +146,5 @@ else:
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = 'apps/home/home'

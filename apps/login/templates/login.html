@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block title %}
+    Login
+{% endblock title %}
+    
+
+{% block header %}
+    <!--   -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{% static 'login/assets/css/login.css' %}">
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css"> 
+
+    <script src="{% static 'sweetalert/src' %}"></script>
+{% endblock header %}
+
+{% block contenido %}
+
+<section class="Form my-4 mx-5">
+    <div class="container">
+        <div class="row g-0 row-footer">
+            <!-- Imagen -->
+            <div class="col-lg-5">
+                <img src="{% static 'login/assets/img/lesp.jpg' %}" alt="">
+            </div>
+            <!-- Panel lateral -->
+            <div class="col-lg-7 px-5 pt-5">
+                <h1 class="font-weight-bold py-3">Login</h1>
+                <h4>Sign into your account</h4>
+                <form method="POST" action=".">
+                    {% csrf_token %}
+                    <!-- Email -->
+                    <div class="form-row">
+                        <div class="col-lg-7">
+                            <!-- <input type="email" class="form-control my-3 p-4" placeholder="Email address"> -->
+
+                            {{form.username|add_class:'form-control my-3 p-4'|attr:'autocomplete:off'|attr:'placeholder:Ingresa tu usuario'}}
+                        </div>
+                    </div>
+                    <!-- Password -->
+                    <div class="form-row">
+                        <div class="col-lg-7">
+                            <!-- <input type="password" class="form-control my-3 p-4" placeholder="Password"> -->
+                            {{form.password|add_class:'form-control my-3 p-4'|attr:'autocomplete:off'|attr:'placeholder:Ingresa tu password'}}
+                        </div>
+                    </div>
+                    <!-- Boton login -->
+                    <div class="form-row">
+                        <div class="col-lg-7">
+                            <button type="button" class="btn1 mt-3 mb-5"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</button>
+                        </div>
+                    </div>
+                    <!-- Olvido su password -->
+                    <div class="row">
+                        <div class="col-md-6 order-2"><a href="#">Forgot your password</a></div>
+                        <div class="col-md-6 order-1 icon-box-color"><a href="{% url 'inicio' %}" style="color:rgb(45, 68, 68);"><i class="fas fa-home"></i> Inicio</a></div>
+                    </div>
+                </form>
+            </div>
+
+            <script type="application/javascript">
+                {% if form.errors %}
+                    var errors = '';
+
+                    {% for field in form %}
+                        {% for erro in field.errors  %}
+                            errors += '{{ error }}\n'
+                        {% endfor %}
+                    {% endfor %}
+
+                    Swal.fire({
+                        title: 'Error!',
+                        text: errors,
+                        icon: 'error'
+                    });
+                {% endif %}
+            </script>
+        </div>
+    </div>
+</section>
+
+{% endblock contenido %}
