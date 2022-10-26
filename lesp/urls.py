@@ -17,10 +17,19 @@ from django.contrib import admin
 from django.urls import path, include
 from apps.inicio.views import InicioView
 from apps.login.views import *
+from apps.home.views import HomeViews
+from apps.almacen.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',InicioView.as_view(), name="inicio"),
-    # path('login/', include('django.contrib.auth.urls'), name='login'),
+
+    # Login de USUARIOS
+    # path('accounts/', include('django.contrib.auth.urls')),
     path('login/', LoginFormView.as_view(), name='login'),
+    path('dashbord/', HomeViews.as_view(), name='dashbord'),
+    path('logout/', logout_request, name='logout'),
+    
+    # Control de almacen
+    path('almacen/entradas', EntradasViews.as_view(), name='entradas_almacen')
 ]

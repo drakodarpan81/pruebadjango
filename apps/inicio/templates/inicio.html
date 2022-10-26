@@ -43,9 +43,19 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="active " href="{% url 'inicio' %}">Inicio</a></li>
-          <li><a href="{% url 'login' %}">Login</a></li>
-          <li><a href="services.html">Services</a></li>
+          <!-- <li><a class="active " href="{% url 'inicio' %}">Inicio</a></li> -->
+          
+          
+          {% if request.user.is_authenticated %}
+            <li><a href="{% url 'home' %}">
+              <i class="fas fa-user-tie"></i>  Bienvenido {{request.user.username}}
+            </a></li>
+          {% else %}
+            <li><a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i>  Login</a></li>
+          {% endif %}
+            
+          
+          <!-- <li><a href="services.html">Services</a></li>
           <li><a href="portfolio.html">Portfolio</a></li>
           <li><a href="team.html">Team</a></li>
           <li><a href="blog.html">Blog</a></li>
@@ -66,7 +76,7 @@
               <li><a href="#">Drop Down 4</a></li>
             </ul>
           </li>
-          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="contact.html">Contact Us</a></li> -->
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

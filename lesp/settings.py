@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 CORE_APPS = [
+    # 'apps.registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -147,4 +148,6 @@ else:
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = 'apps/home/home'
+LOGIN_REDIRECT_URL = 'dashbord'
+LOGOUT_REDIRECT_URL = 'inicio'
+LOGIN_URL = 'login'
