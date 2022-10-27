@@ -19,6 +19,7 @@ from apps.inicio.views import InicioView
 from apps.login.views import *
 from apps.home.views import HomeViews
 from apps.almacen.views import *
+from apps.catalogos.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,5 +32,9 @@ urlpatterns = [
     path('logout/', logout_request, name='logout'),
     
     # Control de almacen
-    path('almacen/entradas', EntradasViews.as_view(), name='entradas_almacen')
+    path('almacen/entradas', EntradasViews.as_view(), name='entradas_almacen'),
+
+    # Catalogos
+    path('catalogos/presentacion', PresentacionView.as_view(), name='catalogo_presentacion'),
+    #path('catalogos/presentacion_add', PresentacionAddView.as_view(), name='catalogo_presentacion_add'),
 ]

@@ -42,12 +42,11 @@ CORE_APPS = [
 ]
 
 PROJECT_APPS = [
-    'apps.usuario',
-    'apps.documentos',
     'apps.inicio',
     'apps.almacen',
     'apps.home',
     'apps.login',
+    'apps.catalogos',
 ]
 
 EXTERNAL_APPS = [

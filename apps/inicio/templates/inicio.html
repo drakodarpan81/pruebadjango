@@ -47,7 +47,7 @@
           
           
           {% if request.user.is_authenticated %}
-            <li><a href="{% url 'home' %}">
+            <li><a href="{% url 'dashbord' %}">
               <i class="fas fa-user-tie"></i>  Bienvenido {{request.user.username}}
             </a></li>
           {% else %}

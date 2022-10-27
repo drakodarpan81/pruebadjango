@@ -4,7 +4,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin | Dashboard</title>
+  <title>
+  {% block title %}
+    
+  {% endblock title %}
+     | Dashboard</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -17,6 +21,12 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    
+    {% block header %}
+      
+    {% endblock header %}
+      
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
@@ -53,7 +63,7 @@
       <li class="nav-item">
         {% if not request.user.is_authenticated %}
             <a class="nav-link" data-widget="fullscreen" href="{% url 'login' %}" role="button">
-                <i class="fas fa-sign-out-alt"></i> Salir
+                <i class="fas fa-sign-out-alt"></i> Login
             </a>          
         {% else %}
             <a class="nav-link" data-widget="fullscreen" href="{% url 'logout' %}" role="button">
@@ -117,7 +127,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{% url 'entradas_almacen' %}" class="nav-link">
+                <a href="{% url 'catalogo_presentacion' %}" class="nav-link">
                     <i class="fa-solid fa-pills"></i>
                   <p>Presentación</p>
                 </a>
