@@ -15,6 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+
+from django.conf import settings
+from django.conf.urls.static import static
+
 from apps.inicio.views import InicioView
 from apps.login.views import *
 from apps.home.views import HomeViews
@@ -36,5 +40,11 @@ urlpatterns = [
 
     # Catalogos
     path('catalogos/presentacion', PresentacionView.as_view(), name='catalogo_presentacion'),
-    #path('catalogos/presentacion_add', PresentacionAddView.as_view(), name='catalogo_presentacion_add'),
+    path('catalogos/articulos', ArticuloView.as_view(), name='catalogo_articulos'),
+
+    # Summernote
+    path('summernote/', include('django_summernote.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

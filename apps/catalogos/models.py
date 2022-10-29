@@ -1,3 +1,5 @@
+from distutils import text_file
+from email.policy import default
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -15,9 +17,6 @@ class CatPresentacion(models.Model):
     def __str__(self):
         return self.nombre_presentacion
 
-    def get_absolute_url(self):
-        return reverse("CatPresentacion_detail", kwargs={"pk": self.pk})
-
 class CatCategoria(models.Model):
     id = models.AutoField(_("id"), primary_key=True)
     nombre_categoria = models.CharField(_("Nombre de la categoría"), max_length=50, blank=False, unique=True)
@@ -31,26 +30,45 @@ class CatCategoria(models.Model):
     def __str__(self):
         return self.nombre_categoria
 
-    def get_absolute_url(self):
-        return reverse("CatCategoria_detail", kwargs={"pk": self.pk})
 
-
-class CatMercancia(models.Model):
+class CatProveedor(models.Model):
     id = models.AutoField(_("id"), primary_key=True)
-    descripcion_producto = models.CharField(_("Descripción del producto"), max_length=100, blank=False, unique=True)
-    presentacion = models.ForeignKey(CatPresentacion, related_name='CatPresentaciones', on_delete=models.CASCADE)
-    categorias = models.ForeignKey(CatCategoria, related_name='CatCategorias', on_delete=models.CASCADE)
-    cantidad = models.PositiveIntegerField(_("Cantidad"))
-    imagen = models.ImageField(_("Imagen del producto"), upload_to='mercancia/', blank=True, null=True, max_length=200)
+    nombre_proveedor = models.CharField(_("Nombre del proveedor"), max_length=50, blank=False)
+    rfc_proveedor = models.CharField(_("RFC"), max_length = 15, blank=False, unique=True)
+    calle = models.CharField(_("Calles"), max_length=50, blank=True, null=True)
+    numero = models.PositiveIntegerField(_("Número"))
+    colonia = models.CharField(_("Colonia"), max_length=50, blank=True, null=True)
+    codigo_postal = models.PositiveIntegerField(_("CP"))
+    telefono = models.PositiveIntegerField(_("Teléfono"))
+    requisicion = models.CharField(_("Requisición"), max_length = 30, blank=False, unique=True)
+    estado = models.BooleanField(_("Activo / Inactivo"), default=True)
     fecha_alta = models.DateTimeField(_("Fecha de alta de la mercancía"), auto_now_add=True)
     fecha_modificacion = models.DateTimeField(_("Fecha de modificación de la mercancía"), auto_now=True)
 
     class Meta:
-        verbose_name = _("CatMercancia")
-        verbose_name_plural = _("CatMercancias")
+        verbose_name = _("CatProveedor")
+        verbose_name_plural = _("CatProveedores")
+
+    def __str__(self):
+        return self.nombre_proveedor
+
+
+class CatArticulo(models.Model):
+    id = models.AutoField(_("id"), primary_key=True)
+    nombre_articulo = models.CharField(_("Nombre del artículo"), max_length=50, blank=False, unique=True)
+    descripcion_articulo = models.TextField(_("Descripción del articulo"))
+    cantidad = models.PositiveIntegerField(_("Cantidad"))
+    presentacion = models.ForeignKey(CatPresentacion, related_name='CatPresentaciones', on_delete=models.CASCADE)
+    proveedor = models.ForeignKey(CatProveedor, related_name='CatProveedor', on_delete=models.CASCADE)
+    imagen = models.ImageField(_("Imagen del producto"), upload_to='mercancia/', blank=True, null=True, max_length=200)
+    estado = models.BooleanField(_("Activo / Inactivo"), default=True)
+    observacion = models.TextField(_("Observación"))
+    fecha_alta = models.DateTimeField(_("Fecha de alta de la mercancía"), auto_now_add=True)
+    fecha_modificacion = models.DateTimeField(_("Fecha de modificación de la mercancía"), auto_now=True)
+
+    class Meta:
+        verbose_name = _("CatArticulo")
+        verbose_name_plural = _("CatArticulos")
 
     def __str__(self):
         return self.descripcion_producto
-
-    def get_absolute_url(self):
-        return reverse("CatMercancia_detail", kwargs={"pk": self.pk})

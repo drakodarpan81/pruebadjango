@@ -133,9 +133,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="{% url 'catalogo_articulos' %}" class="nav-link">
                     <i class="fa-solid fa-sitemap"></i>
-                  <p>Categorias</p>
+                  <p>Articulos</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -221,10 +221,11 @@
 
 </div>
 <!-- ./wrapper -->
-
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
 <script src="{% static 'home/plugins/jquery/jquery.min.js' %}"></script>
+<!-- <script src="{% static 'jquery/jquery-3.6.1.min.js' %}"></script> -->
+
 <!-- Bootstrap -->
 <script src="{% static 'home/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 <!-- overlayScrollbars -->
@@ -240,5 +241,10 @@
 <!-- ChartJS -->
 <script src="{% static 'home/plugins/chart.js/Chart.min.js' %}"></script>
 
+{% block js %}
+  
+{% endblock js %}
+
+  
 </body>
 </html>

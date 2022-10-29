@@ -51,6 +51,7 @@ PROJECT_APPS = [
 
 EXTERNAL_APPS = [
     'widget_tweaks',
+    'django_summernote',
 ]
 
 INSTALLED_APPS = CORE_APPS + PROJECT_APPS + EXTERNAL_APPS
@@ -134,6 +135,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+# STATIC_ROOT = BASE_DIR / 'static'
 
 if DEBUG:
     STATICFILES_DIRS = [
@@ -150,3 +152,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'dashbord'
 LOGOUT_REDIRECT_URL = 'inicio'
 LOGIN_URL = 'login'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media/'
