@@ -1,7 +1,7 @@
 {% extends "dashbord.html" %} 
 {% load static %} 
 {% load widget_tweaks %} 
-{% block title %} Presentación {% endblock title %} 
+{% block title %} Articulos {% endblock title %} 
 
 {% block header %}
   
@@ -24,12 +24,6 @@
         <form method="post">
           {% csrf_token %}
           <div class="card-body">
-            <!--             
-proveedor
-imagen
-estado
-observacion -->
-
             <div class="form-group">
               <label>{{form.nombre_articulo.label}} </label>
               {{form.nombre_articulo|add_class:'form-control'|attr:'autofocus:True'|attr:'placeholder: Nombre del artículo'}}
@@ -107,9 +101,14 @@ observacion -->
 
 {% block js %}
   <script src="{% static 'input-number/src/bootstrap-input-spinner.js' %}"></script>
+  <script src="{% static 'home/plugins/bs-custom-file-input/bs-custom-file-input.min.js' %}"></script>
 
   <script>
     $("input\[type='number'\]").inputSpinner();
+
+    $(function () {
+      bsCustomFileInput.init();
+    });
   </script>
 {% endblock js %}
   

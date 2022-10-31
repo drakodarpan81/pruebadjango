@@ -4,8 +4,8 @@ from django.views.generic import TemplateView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 
-from apps.catalogos.models import CatPresentacion, CatArticulo
-from apps.catalogos.forms import PresentacionForm, ArticuloForm
+from apps.catalogos.models import CatPresentacion, CatArticulo, CatProveedor
+from apps.catalogos.forms import PresentacionForm, ArticuloForm, ProveedorForm
 
 # Create your views here.
 class PresentacionView(LoginRequiredMixin, CreateView):
@@ -25,3 +25,17 @@ class ArticuloView(LoginRequiredMixin, CreateView):
     template_name='articulos.html'
     form_class=ArticuloForm
     success_url=reverse_lazy('inicio')
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            print(request.POST)
+
+        return render(request, self.template_name, {'form': form})
+
+class ProveedorView(LoginRequiredMixin, CreateView):
+    model=CatProveedor
+    template_name="proveedores.html"
+    form_class=ProveedorForm
+    success_url=reverse_lazy('inicio')
+

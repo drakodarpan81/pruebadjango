@@ -56,11 +56,12 @@ class CatProveedor(models.Model):
 class CatArticulo(models.Model):
     id = models.AutoField(_("id"), primary_key=True)
     nombre_articulo = models.CharField(_("Nombre del artículo"), max_length=50, blank=False, unique=True)
-    descripcion_articulo = models.TextField(_("Descripción del articulo"))
+    descripcion_articulo = models.TextField()
     cantidad = models.PositiveIntegerField(_("Cantidad"))
     presentacion = models.ForeignKey(CatPresentacion, related_name='CatPresentaciones', on_delete=models.CASCADE)
     proveedor = models.ForeignKey(CatProveedor, related_name='CatProveedor', on_delete=models.CASCADE)
-    imagen = models.ImageField(_("Imagen del producto"), upload_to='mercancia/', blank=True, null=True, max_length=200)
+    # imagen = models.ImageField(_("Imagen del producto"), upload_to='mercancia/', blank=True, null=True, max_length=200)
+    exampleInputFile = models.ImageField(_("Imagen del producto"), upload_to='mercancia/', blank=True, null=True, max_length=200)
     estado = models.BooleanField(_("Activo / Inactivo"), default=True)
     observacion = models.TextField(_("Observación"))
     fecha_alta = models.DateTimeField(_("Fecha de alta de la mercancía"), auto_now_add=True)
@@ -71,4 +72,4 @@ class CatArticulo(models.Model):
         verbose_name_plural = _("CatArticulos")
 
     def __str__(self):
-        return self.descripcion_producto
+        return 'Articulo {} del proveedor {}'.format(self.nombre_articulo, self.proveedor.nombre_proveedor)

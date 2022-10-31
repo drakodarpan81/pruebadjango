@@ -6,7 +6,6 @@ class LoginFormView(LoginView):
     template_name = 'login.html'
 
     def dispatch(self, request, *args, **kwargs):
-        print(request.user)
         if request.user.is_authenticated:
             return redirect('inicio')
             

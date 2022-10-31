@@ -41,10 +41,8 @@ urlpatterns = [
     # Catalogos
     path('catalogos/presentacion', PresentacionView.as_view(), name='catalogo_presentacion'),
     path('catalogos/articulos', ArticuloView.as_view(), name='catalogo_articulos'),
+    path('catalogos/proveedores', ProveedorView.as_view(), name='catalogo_proveedores'),
 
     # Summernote
     path('summernote/', include('django_summernote.urls')),
-]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
