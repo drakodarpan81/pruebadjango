@@ -26,16 +26,18 @@ class ArticuloView(LoginRequiredMixin, CreateView):
     form_class=ArticuloForm
     success_url=reverse_lazy('inicio')
 
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            print(request.POST)
-
-        return render(request, self.template_name, {'form': form})
-
 class ProveedorView(LoginRequiredMixin, CreateView):
     model=CatProveedor
     template_name="proveedores.html"
     form_class=ProveedorForm
     success_url=reverse_lazy('inicio')
 
+    """
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        
+        if form.is_valid():
+            print(request.POST)
+
+        return render(request, self.template_name, {'form': form})
+    """

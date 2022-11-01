@@ -21,8 +21,8 @@ class ArticuloForm(forms.ModelForm):
         """Meta definition for MODELNAMEform."""
 
         model = CatArticulo
-        fields = '__all__'
-        summernote_fields = ('descripcion_articulo', 'observacion',)
+        fields = ['nombre_articulo', 'descripcion_articulo', 'cantidad', 'presentacion', 'proveedor', 'imagen', 'estado', 'observacion',]
+        summernote_fields = ('descripcion_articulo', )
 
 
 class ProveedorForm(forms.ModelForm):

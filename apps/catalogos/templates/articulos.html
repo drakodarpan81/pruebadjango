@@ -21,12 +21,12 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
           {% csrf_token %}
           <div class="card-body">
             <div class="form-group">
               <label>{{form.nombre_articulo.label}} </label>
-              {{form.nombre_articulo|add_class:'form-control'|attr:'autofocus:True'|attr:'placeholder: Nombre del artículo'}}
+              {{form.nombre_articulo|add_class:'form-control'|attr:'autofocus:True'|attr:'placeholder: Nombre del artículo'|attr:''}}
             </div>
 
             <div class="row">
@@ -54,17 +54,22 @@
                     {{form.proveedor|add_class:'form-control'|attr:'id:inputEstimatedDuration'|attr:'type:number'}}
                   </div>
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="exampleInputFile">{{form.imagen.label}}</label>
                     <div class="input-group">
                       <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile">
+                        <input type="file" class="custom-file-input" id="exampleInputFile" name="{{form.imagen.label}}">
                         <label class="custom-file-label" for="exampleInputFile">{{form.imagen.label}}</label>
                       </div>
                       <div class="input-group-append">
                         <span class="input-group-text">Upload</span>
                       </div>
                     </div>
+                  </div> -->
+
+                  <div class="form-group">
+                    <label for="inputEstimatedDuration">{{form.imagen.label}}</label>
+                    {{form.imagen|add_class:'form-control'|attr:'id:inputEstimatedDuration'}}
                   </div>
 
                   <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
