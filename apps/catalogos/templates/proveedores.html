@@ -1,117 +1,128 @@
 {% extends 'dashbord.html' %}
 {% load static %}
-{% load widget_tweaks %} 
-{% block title %} Proveedores {% endblock title %} 
+{% load widget_tweaks %}
+{% block title %}
+    Proveedores
+{% endblock title %}
 
-{% block header %}
-  
-{% endblock header %} 
+{% block subcategoria %}
+    <li class="breadcrumb-item active">Proveedores</li>
+{% endblock subcategoria %}
+
+{% block header %}{% endblock header %}
 
 {% block contenido %}
-<div class="container-fluid">
-    <div class="row">
-      <!-- left column -->
-      <div class="col-md-12">
-        <!-- general form elements -->
-        <div class="card card-primary">
-          <div class="card-header">
-            <h3 class="card-title">
-              <i class="fa-solid fa-file-circle-plus"></i> Alta de proveedores
-            </h3>
-          </div>
-          <!-- /.card-header -->
-          <!-- form start -->
-          <form method="post">
-            {% csrf_token %}
-            <div class="card-body">
-              <div class="form-group">
-                <label>{{form.nombre_proveedor.label}} </label>
-                {{form.nombre_proveedor|add_class:'form-control'|attr:'autofocus:True'|attr:'placeholder: Nombre del proveedor'}}
-              </div>
+    <div class="container-fluid">
+        <div
+            class="row">
+            <!-- left column -->
+            <div
+                class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fa-solid fa-file-circle-plus"></i>
+                            Alta de proveedores
+                        </h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <br>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6">
 
-              <div class="form-group">
-                <label>{{form.rfc_proveedor.label}} </label>
-                {{form.rfc_proveedor|add_class:'form-control'|attr:'placeholder: RFC del proveedor'|attr:'onkeyup:this.value=this.value.toUpperCase()'}}
-              </div>
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title">Datos del proveedor</h3>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label>{{ form.nombre_proveedor.label }}
+                                            </label>
+                                            {{ form.nombre_proveedor|add_class:'form-control'|attr:'autofocus:True'|attr:'placeholder: Nombre del proveedor'|attr:'autocomplete:off' }}
+                                        </div>
 
-              <div class="form-group">
-                <label>{{form.calle.label}} </label>
-                {{form.calle|add_class:'form-control'|attr:'placeholder: Calle del proveedor'}}
-              </div>
+                                        <div class="form-group">
+                                            <label>{{ form.rfc_proveedor.label }}
+                                            </label>
+                                            {{ form.rfc_proveedor|add_class:'form-control'|attr:'placeholder: RFC del proveedor'|attr:'onkeyup:this.value=this.value.toUpperCase()'|attr:'autocomplete:off' }}
+                                        </div>
 
-              <div class="form-group">
-                <label for="inputEstimatedDuration">{{form.numero.label}}</label>
-                {{form.numero|add_class:'form-control'|attr:'id:inputEstimatedDuration'|attr:'type:number'}}
-              </div>
+                                        <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                            {{ form.estado|add_class:'custom-control-input'|attr:'id:customSwitch3' }}
+                                            <label class="custom-control-label" for="customSwitch3">{{ form.estado.label }}</label>
+                                        </div>
+                                    </div>
+                                </div>
 
-              <div class="form-group">
-                <label>{{form.colonia.label}} </label>
-                {{form.colonia|add_class:'form-control'|attr:'placeholder: Colonia del proveedor'}}
-              </div>
+                                <div class="col-md-6">
 
-              <div class="form-group">
-                <label for="inputEstimatedDuration">{{form.codigo_postal.label}}</label>
-                {{form.codigo_postal|add_class:'form-control'|attr:'id:inputEstimatedDuration'|attr:'type:number'|attr:'onKeyUp:if(this.value>99999){this.value="99999";}else if(this.value<0){this.value="0";}'}}
-              </div>
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="card-title">Domicilio del proveedor</h5>
+                                        </div>
+                                    </div>
 
-              <div class="form-group">
-                <label>{{form.telefono.label}} </label>
-                {{form.telefono|add_class:'form-control'|attr:'placeholder: (999) 999-9999'|attr:'id:yourphone'|attr:'type:text'}}
-              </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label>{{ form.calle.label }}
+                                            </label>
+                                            {{ form.calle|add_class:'form-control'|attr:'placeholder: Calle del proveedor' }}
+                                        </div>
 
-              <div class="form-group">
-                <label>{{form.requisicion.label}} </label>
-                {{form.requisicion|add_class:'form-control'|attr:'placeholder: Requisición del proveedor'|attr:'onkeyup:this.value=this.value.toUpperCase()'}}
-              </div>
+                                        <div class="form-group">
+                                            <label for="inputEstimatedDuration">{{ form.numero.label }}</label>
+                                            {{ form.numero|add_class:'form-control'|attr:'id:inputEstimatedDuration'|attr:'type:number'|attr:'autocomplete:off' }}
+                                        </div>
 
-              <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-                {{form.estado|add_class:'custom-control-input'|attr:'id:customSwitch3'}}
-                <label class="custom-control-label" for="customSwitch3">{{form.estado.label}}</label >
-              </div>
-  
+                                        <div class="form-group">
+                                            <label>{{ form.colonia.label }}
+                                            </label>
+                                            {{ form.colonia|add_class:'form-control'|attr:'placeholder: Colonia del proveedor' }}
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputEstimatedDuration">{{ form.codigo_postal.label }}</label>
+                                            {{ form.codigo_postal|add_class:'form-control'|attr:'id:inputEstimatedDuration'|attr:'type:number'|attr:'autocomplete:off'|attr:'onKeyUp:if(this.value>99999){this.value="99999";}else if(this.value<0){this.value="0";}' }}
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>{{ form.telefono.label }}
+                                            </label>
+                                            {{ form.telefono|add_class:'form-control'|attr:'placeholder: (999) 999-9999'|attr:'id:yourphone'|attr:'type:text' }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- /.card-body -->
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa-solid fa-floppy-disk"></i>
+                                    Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!--/.col (left) -->
             </div>
-            <!-- /.card-body -->
-  
-            <div class="card-footer">
-              <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
-            </div>
-          </form>
+            <!-- /.row -->
         </div>
-        <!-- /.card -->
-      </div>
-      <!--/.col (left) -->
-    </div>
-    <!-- /.row -->
-  </div>
-  <!-- /.container-fluid -->
-{% endblock contenido %}
-    
-{% block js %}
-<script src="https://unpkg.com/jquery-input-mask-phone-number@1.0.15/dist/jquery-input-mask-phone-number.js"></script>
+        <!-- /.container-fluid -->
+    {% endblock contenido %}
 
-  <script>
-    $(document).ready(function(){  
-        $('#yourphone').usPhoneFormat({
-            format: '(xxx) xxx-xxxx',
-        });
-    });  
+    {% block js %}
+        <script src="https://unpkg.com/jquery-input-mask-phone-number@1.0.15/dist/jquery-input-mask-phone-number.js"></script>
 
-    {% if form.errors %}
-        var errors = '';
-          {% for field in form %}
-            
-            {% for error in field.errors %}
-              errors+='{{error}}\n'
-            {% endfor %}
-              
-          {% endfor %}
-
-          Swal.fire({
-  icon: 'error',
-  title: 'Oops...',
-  text: errors
-});
-        {% endif %}
-  </script>
-{% endblock js %}
-  
+        <script>
+            $(document).ready(function () {
+                $('#yourphone').usPhoneFormat({format: '(xxx) xxx-xxxx'});
+            });{% if form.errors %}var errors = '';{% for field in form %}{% for error in field.errors %}errors +='{{ error }}\n'{% endfor %}{% endfor %}Swal.fire({icon: 'error', title: 'Oops...', text: errors});{% endif %}
+        </script>
+    {% endblock js %}

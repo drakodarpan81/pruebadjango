@@ -1,0 +1,33 @@
+{% extends 'dashbord.html' %}
+
+{% block contenido %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="{{icon_card}}"></i>
+                        {{ title }}
+                    </h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <form>
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h5><i class="icon fas fa-exclamation-triangle"></i> Notificación!</h5>
+                            ¿Deseas Eliminar el registro " {{object.nombre_articulo}} "? Una vez borrado, no se puede recuperar la información.
+                          </div>
+                        <!-- /.card-body -->
+        
+                        <div class="card-footer">
+                          <button type="submit" class="btn btn-block btn-outline-primary"><i class="fa-regular fa-floppy-disk"></i> Si, acepto</button>
+                          <a href="{{list_url}}" class="btn btn-block btn-outline-warning"><i class="fa-regular fa-circle-xmark"></i> Cancelar</a>
+                        </div>
+                      </form>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div>
+{% endblock contenido %}

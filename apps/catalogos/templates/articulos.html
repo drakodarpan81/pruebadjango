@@ -1,7 +1,7 @@
 {% extends "dashbord.html" %} 
 {% load static %} 
 {% load widget_tweaks %} 
-{% block title %} Articulos {% endblock title %} 
+{% block title %} {{title}} {% endblock title %} 
 
 {% block header %}
   
@@ -16,7 +16,7 @@
       <div class="card card-primary">
         <div class="card-header">
           <h3 class="card-title">
-            <i class="fa-solid fa-file-circle-plus"></i> Alta de articulos
+            <i class="{{icon_card}}"></i> {{title_card}} articulo
           </h3>
         </div>
         <!-- /.card-header -->
@@ -26,7 +26,7 @@
           <div class="card-body">
             <div class="form-group">
               <label>{{form.nombre_articulo.label}} </label>
-              {{form.nombre_articulo|add_class:'form-control'|attr:'autofocus:True'|attr:'placeholder: Nombre del artículo'|attr:''}}
+              {{form.nombre_articulo|add_class:'form-control'|attr:'autofocus:True'|attr:'placeholder: Nombre del artículo'|attr:'autocomplete:off'}}
             </div>
 
             <div class="row">
@@ -54,27 +54,9 @@
                     {{form.proveedor|add_class:'form-control'|attr:'id:inputEstimatedDuration'|attr:'type:number'}}
                   </div>
 
-                  <!-- <div class="form-group">
-                    <label for="exampleInputFile">{{form.imagen.label}}</label>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile" name="{{form.imagen.label}}">
-                        <label class="custom-file-label" for="exampleInputFile">{{form.imagen.label}}</label>
-                      </div>
-                      <div class="input-group-append">
-                        <span class="input-group-text">Upload</span>
-                      </div>
-                    </div>
-                  </div> -->
-
                   <div class="form-group">
                     <label for="inputEstimatedDuration">{{form.imagen.label}}</label>
                     {{form.imagen|add_class:'form-control'|attr:'id:inputEstimatedDuration'}}
-                  </div>
-
-                  <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-                    {{form.estado|add_class:'custom-control-input'|attr:'id:customSwitch3'}}
-                    <label class="custom-control-label" for="customSwitch3">{{form.estado.label}}</label >
                   </div>
 
                   <div class="form-group">
@@ -82,6 +64,11 @@
                     {{form.observacion|add_class:'form-control'|attr:'rows:4'}}
                   </div>
 
+                  <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                    {{form.estado|add_class:'custom-control-input'|attr:'id:customSwitch3'}}
+                    <label class="custom-control-label" for="customSwitch3">{{form.estado.label}}</label >
+                  </div>
+                  
                 </div>
               </div>
             </div>

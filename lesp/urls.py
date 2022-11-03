@@ -43,6 +43,15 @@ urlpatterns = [
     path('catalogos/articulos', ArticuloView.as_view(), name='catalogo_articulos'),
     path('catalogos/proveedores', ProveedorView.as_view(), name='catalogo_proveedores'),
 
+    # Listados
+    path('catalogos/listado_articulos', ArticuloListView.as_view(), name='listado_articulos'),
+
+    # Editar
+    path('catalogos/edit_articulos/<int:pk>/', ArticuloUpdateView.as_view(), name='editar_articulos'),
+
+    # Eliminar
+    path('catalogos/delete_articulos/<int:pk>/', ArticuloDeleteView.as_view(), name='delete_articulos'),
+
     # Summernote
     path('summernote/', include('django_summernote.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
