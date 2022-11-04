@@ -24,6 +24,11 @@ class ArticuloForm(forms.ModelForm):
         fields = ['nombre_articulo', 'descripcion_articulo', 'cantidad', 'presentacion', 'proveedor', 'imagen', 'estado', 'observacion',]
         summernote_fields = ('descripcion_articulo', )
 
+    def __init__(self, *args, **kwargs):
+        super(ArticuloForm, self).__init__(*args, **kwargs)
+        instance = getattr(self, 'instance', None)
+        if instance and instance.id:
+            self.fields['cantidad'].widget.attrs['readonly'] = 'True'
 
 class ProveedorForm(forms.ModelForm):
     

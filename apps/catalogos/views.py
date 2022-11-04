@@ -23,9 +23,9 @@ class PresentacionView(LoginRequiredMixin, CreateView):
 # CURD Articulos
 class ArticuloView(LoginRequiredMixin, CreateView):
     model=CatArticulo
-    template_name='articulos.html'
+    template_name='articulos/articulos.html'
     form_class=ArticuloForm
-    success_url=reverse_lazy('inicio')
+    success_url=reverse_lazy('listado_articulos')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -36,12 +36,12 @@ class ArticuloView(LoginRequiredMixin, CreateView):
     
 class ArticuloListView(LoginRequiredMixin, ListView):
     model = CatArticulo
-    template_name = "list_articulo.html"
+    template_name = "articulos/list_articulo.html"
 
 
 class ArticuloUpdateView(LoginRequiredMixin,UpdateView):
     model = CatArticulo
-    template_name = "articulos.html"
+    template_name = "articulos/articulos.html"
     form_class=ArticuloForm
     success_url=reverse_lazy('listado_articulos')
 
@@ -55,7 +55,7 @@ class ArticuloUpdateView(LoginRequiredMixin,UpdateView):
 
 class ArticuloDeleteView(LoginRequiredMixin, DeleteView):
     model = CatArticulo
-    template_name = "delete_articulo.html"
+    template_name = "articulos/delete_articulo.html"
     success_url=reverse_lazy('listado_articulos')
 
     def get_context_data(self, **kwargs):
@@ -65,12 +65,20 @@ class ArticuloDeleteView(LoginRequiredMixin, DeleteView):
         context["list_url"] = reverse_lazy('listado_articulos')
         return context
     
-# CURD Proveedores
+# CRUD Proveedores
 class ProveedorView(LoginRequiredMixin, CreateView):
     model=CatProveedor
-    template_name="proveedores.html"
+    template_name="proveedores/proveedores.html"
     form_class=ProveedorForm
     success_url=reverse_lazy('inicio')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = 'Alta de proveedores'
+        context["title_card"] = 'Alta de'
+        context["icon_card"] = 'fa-solid fa-file-circle-plus'
+        context["subcategoria"] = 'Alta de proveedores'
+        return context
 
     """
     def post(self, request, *args, **kwargs):
@@ -81,3 +89,34 @@ class ProveedorView(LoginRequiredMixin, CreateView):
 
         return render(request, self.template_name, {'form': form})
     """
+
+class ProveedoresListView(ListView):
+    model = CatProveedor
+    template_name = "proveedores/list_proveedores.html"
+
+
+class ProveedorUpdateView(UpdateView):
+    model = CatProveedor
+    template_name = "proveedores/proveedores.html"
+    form_class=ProveedorForm
+    success_url=reverse_lazy('listado_proveedores')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = 'Actualización de proveedores'
+        context["title_card"] = 'Actualización de'
+        context["icon_card"] = 'fa-solid fa-pen-to-square'
+        context["subcategoria"] = 'Actualización de proveedores'
+        return context
+
+
+class ProveedorDeleteView(DeleteView):
+    model = CatProveedor
+    template_name = "proveedores/delete_proveedor.html"
+    success_url = reverse_lazy('listado_proveedores')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["list_url"] = reverse_lazy('listado_proveedores')
+        return context
+    

@@ -1,0 +1,106 @@
+{% extends "dashbord.html" %} 
+{% load static %} 
+{% load widget_tweaks %} 
+{% block title %} {{title}} {% endblock title %} 
+
+{% block header %}
+  
+{% endblock header %} 
+
+{% block contenido %}
+<div class="container-fluid">
+  <div class="row">
+    <!-- left column -->
+    <div class="col-md-12">
+      <!-- general form elements -->
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="{{icon_card}}"></i> {{title_card}} articulo
+          </h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="card-body">
+            <div class="form-group">
+              <label>{{form.nombre_articulo.label}} </label>
+              {{form.nombre_articulo|add_class:'form-control'|attr:'autofocus:True'|attr:'placeholder: Nombre del artículo'|attr:'autocomplete:off'}}
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>{{form.descripcion_articulo.label}} </label>
+                  {{form.descripcion_articulo}}
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+
+                  <div class="form-group">
+                    <label for="inputEstimatedDuration">{{form.cantidad.label}}</label>
+                    {{form.cantidad|add_class:'form-control'|attr:'id:inputEstimatedDuration'|attr:'type:number'}}
+                  </div>
+
+                  <div class="form-group">
+                    <label for="inputEstimatedDuration">{{form.presentacion.label}}</label>
+                    {{form.presentacion|add_class:'form-control'|attr:'id:inputEstimatedDuration'|attr:'type:number'}}
+                  </div>
+
+                  <div class="form-group">
+                    <label for="inputEstimatedDuration">{{form.proveedor.label}}</label>
+                    {{form.proveedor|add_class:'form-control'|attr:'id:inputEstimatedDuration'|attr:'type:number'}}
+                  </div>
+
+                  <div class="form-group">
+                    <label for="inputEstimatedDuration">{{form.imagen.label}}</label>
+                    {{form.imagen|add_class:'form-control'|attr:'id:inputEstimatedDuration'}}
+                  </div>
+
+                  <div class="form-group">
+                    <label>{{form.observacion.label}} </label>
+                    {{form.observacion|add_class:'form-control'|attr:'rows:4'}}
+                  </div>
+
+                  <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                    {{form.estado|add_class:'custom-control-input'|attr:'id:customSwitch3'}}
+                    <label class="custom-control-label" for="customSwitch3">{{form.estado.label}}</label >
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- /.card-body -->
+
+          <div class="card-footer">
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+          </div>
+        </form>
+      </div>
+      <!-- /.card -->
+    </div>
+    <!--/.col (left) -->
+  </div>
+  <!-- /.row -->
+</div>
+<!-- /.container-fluid -->
+{% endblock contenido %}
+
+
+{% block js %}
+  <script src="{% static 'input-number/src/bootstrap-input-spinner.js' %}"></script>
+  <script src="{% static 'home/plugins/bs-custom-file-input/bs-custom-file-input.min.js' %}"></script>
+
+  <script>
+    $("input\[type='number'\]").inputSpinner();
+
+    $(function () {
+      bsCustomFileInput.init();
+    });
+  </script>
+{% endblock js %}
+  
