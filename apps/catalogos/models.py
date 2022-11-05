@@ -78,7 +78,7 @@ class CatArticulo(models.Model):
     proveedor = models.ForeignKey(
         CatProveedor, related_name='CatProveedor', on_delete=models.CASCADE)
     requisicion = models.CharField(
-        _("Requisición"), max_length=30, blank=False, unique=True, default='')
+        _("Requisición"), max_length=30, blank=False, default='')
     imagen = models.ImageField(
         _("Imagen del producto"), upload_to='articulos/', blank=True, null=True, max_length=200)
     estado = models.BooleanField(_("Activo / Inactivo"), default=True)
@@ -94,3 +94,7 @@ class CatArticulo(models.Model):
 
     def __str__(self):
         return 'Articulo {} del proveedor {}'.format(self.nombre_articulo, self.proveedor.nombre_proveedor)
+
+    def save(self):
+        self.nombre_articulo = self.nombre_articulo.upper()
+        super(CatArticulo, self).save()

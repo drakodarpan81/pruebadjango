@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, CreateView, ListView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from django.contrib import messages
 
 from apps.catalogos.models import CatPresentacion, CatArticulo, CatProveedor
 from apps.catalogos.forms import PresentacionForm, ArticuloForm, ProveedorForm
@@ -33,7 +34,12 @@ class ArticuloView(LoginRequiredMixin, CreateView):
         context["title_card"] = 'Alta de'
         context["icon_card"] = 'fa-solid fa-file-circle-plus'
         return context
-    
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        messages.success(self.request, 'El articulo se dio de alta con éxito')
+        return super().form_valid(form)
+
 class ArticuloListView(LoginRequiredMixin, ListView):
     model = CatArticulo
     template_name = "articulos/list_articulo.html"
@@ -51,6 +57,12 @@ class ArticuloUpdateView(LoginRequiredMixin,UpdateView):
         context["title_card"] = 'Actualización del'
         context["icon_card"] = 'fa-solid fa-pen-to-square'
         return context
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        print(form.instance)
+        messages.success(self.request, 'El articulo se actualizo con éxito')
+        return super().form_valid(form)
     
 
 class ArticuloDeleteView(LoginRequiredMixin, DeleteView):
@@ -70,7 +82,7 @@ class ProveedorView(LoginRequiredMixin, CreateView):
     model=CatProveedor
     template_name="proveedores/proveedores.html"
     form_class=ProveedorForm
-    success_url=reverse_lazy('inicio')
+    success_url=reverse_lazy('proveedores/list_proveedores.html')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

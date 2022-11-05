@@ -335,4 +335,18 @@
                             });
                         });
                     </script>
+
+{% if messages %}
+    {% for m in messages %}
+    <script>
+        Swal.fire({
+        position: 'top-end',
+  icon: 'success',
+  title: '{{m}}',
+  showConfirmButton: false,
+  timer: 1500
+        })
+    </script>
+    {% endfor %}
+{% endif %}
                 {% endblock js %}

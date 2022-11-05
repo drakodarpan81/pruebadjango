@@ -30,6 +30,20 @@ class ArticuloForm(forms.ModelForm):
         if instance and instance.id:
             self.fields['cantidad'].widget.attrs['readonly'] = 'True'
 
+    def clean(self):
+        try:
+            campo = CatArticulo.objects.get(
+                nombre_articulo=self.cleaned_data['nombre_articulo'].upper()
+            )
+
+            if not self.instance.pk:
+                raise forms.ValidationError("[Nombre del artículo] = Este registro ya existe")
+            elif self.instance.pk!=campo.pk:
+                raise forms.ValidationError("[Nombre del artículo] = Cambio no permitido, coincide con otro registro")
+        except CatArticulo.DoesNotExist:
+            pass
+        return self.cleaned_data
+
 class ProveedorForm(forms.ModelForm):
     
     class Meta:

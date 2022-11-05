@@ -20,10 +20,20 @@
           </h3>
         </div>
         <!-- /.card-header -->
+
         <!-- form start -->
         <form method="post" enctype="multipart/form-data">
           {% csrf_token %}
+
           <div class="card-body">
+            <!-- Error -->
+            {% if form.errors %}
+              <br>
+              <button type="button" class="btn btn-danger toastrDefaultError">
+                Existen errores, click para mostrarlos
+              </button>
+            {% endif %}
+
             <div class="form-group">
               <label>{{form.nombre_articulo.label}} </label>
               {{form.nombre_articulo|add_class:'form-control'|attr:'autofocus:True'|attr:'placeholder: Nombre del artículo'|attr:'autocomplete:off'}}
@@ -41,7 +51,7 @@
 
                   <div class="form-group">
                     <label for="inputEstimatedDuration">{{form.cantidad.label}}</label>
-                    {{form.cantidad|add_class:'form-control'|attr:'id:inputEstimatedDuration'|attr:'type:number'}}
+                    {{form.cantidad|add_class:'form-control'|attr:'id:inputEstimatedDuration'|attr:'type:number'|attr:'autocomplete:off'}}
                   </div>
 
                   <div class="form-group">
@@ -56,6 +66,9 @@
 
                   <div class="form-group">
                     <label for="inputEstimatedDuration">{{form.imagen.label}}</label>
+                    {% if form.imagen.url != '' %}
+                      <img src="{{form.imagen.url}}" alt="">
+                    {% endif %}
                     {{form.imagen|add_class:'form-control'|attr:'id:inputEstimatedDuration'}}
                   </div>
 
@@ -95,11 +108,36 @@
   <script src="{% static 'input-number/src/bootstrap-input-spinner.js' %}"></script>
   <script src="{% static 'home/plugins/bs-custom-file-input/bs-custom-file-input.min.js' %}"></script>
 
+  <link rel="stylesheet" href="{% static 'CodeSeven/build/css/toastr.min.css' %}">
+  <script src="{% static 'CodeSeven/build/js/toastr.min.js' %}"></script>
+
   <script>
     $("input\[type='number'\]").inputSpinner();
 
     $(function () {
       bsCustomFileInput.init();
+
+      toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": true,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+      };
+
+      $('.toastrDefaultError').click(function() {
+        toastr.error('{{form.non_field_errors}}')
+      });
     });
   </script>
 {% endblock js %}
