@@ -24,6 +24,7 @@ from apps.login.views import *
 from apps.home.views import HomeViews
 from apps.almacen.views import *
 from apps.catalogos.views import *
+from apps.almacen.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,9 +36,6 @@ urlpatterns = [
     path('dashbord/', HomeViews.as_view(), name='dashbord'),
     path('logout/', logout_request, name='logout'),
     
-    # Control de almacen
-    path('almacen/entradas', EntradasViews.as_view(), name='entradas_almacen'),
-
     # Catalogos
     path('catalogos/presentacion', PresentacionView.as_view(), name='catalogo_presentacion'),
     path('catalogos/articulos', ArticuloView.as_view(), name='catalogo_articulos'),
@@ -55,6 +53,10 @@ urlpatterns = [
     path('catalogos/delete_articulos/<int:pk>/', ArticuloDeleteView.as_view(), name='delete_articulos'),
     path('catalogos/delete_proveedor/<int:pk>/', ProveedorDeleteView.as_view(), name='delete_proveedor'),
 
+    # Control de almacen
+    path('almacen/entradas', EntradasAlmacenViews.as_view(), name='entradas_almacen'),
+    # path('almacen/buscar_articulo', listar_articulos, name='listar_articulos'),
+    
     # Summernote
     path('summernote/', include('django_summernote.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

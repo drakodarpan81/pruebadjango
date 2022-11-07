@@ -3,6 +3,10 @@
 {% load widget_tweaks %} 
 {% block title %} {{title}} {% endblock title %} 
 
+{% block subcategoria %}
+    <li class="breadcrumb-item active">{{ title }}</li>
+{% endblock subcategoria %}
+
 {% block header %}
   
 {% endblock header %} 
@@ -40,13 +44,13 @@
             </div>
 
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-6 col-sm-3">
                 <div class="form-group">
                   <label>{{form.descripcion_articulo.label}} </label>
                   {{form.descripcion_articulo}}
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6 col-sm-3">
                 <div class="form-group">
 
                   <div class="form-group">
@@ -90,7 +94,14 @@
           <!-- /.card-body -->
 
           <div class="card-footer">
-            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+            <div class="row">
+              <div class="col-sm-3">
+                <button type="submit" class="btn btn-block btn-outline-success"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+              </div>
+              <div class="col-sm-3">
+                <a href="{% url 'listado_articulos' %}" class="btn btn-block btn-outline-warning"><i class="fa-solid fa-circle-arrow-left"></i> Cancelar</a>
+              </div>
+            </div>
           </div>
         </form>
       </div>

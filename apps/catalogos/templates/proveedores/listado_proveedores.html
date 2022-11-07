@@ -17,6 +17,8 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
+            <a href="{% url 'catalogo_proveedores' %}" class="btn btn-block btn-outline-primary"><i class="fa-solid fa-user-plus"></i> Agregar proveedor</a>
+            <br>
             <table id="proveedores" class="table table-bordered table-striped">
                 <thead>
                     <tr>
@@ -338,4 +340,18 @@
                             });
         });
     </script>
+
+{% if messages %}
+{% for m in messages %}
+<script>
+    Swal.fire({
+    position: 'top-end',
+icon: 'success',
+title: '{{m}}',
+showConfirmButton: false,
+timer: 1500
+    })
+</script>
+{% endfor %}
+{% endif %}
 {% endblock js %}

@@ -1,0 +1,69 @@
+{% extends "dashbord.html" %}
+{% load static %}
+
+{% block title %}
+    Entradas al almacen
+{% endblock title %}
+
+{% block subcategoria %}
+    <li class="breadcrumb-item active">Entrada de almacen</li>
+{% endblock subcategoria %}
+
+
+{% block contenido %}
+<div class="container-fluid">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">
+              <i class="{{icon_card}}"></i> {{title_card}}
+            </h3>
+          </div>
+          <!-- /.card-header -->
+  
+          <!-- form start -->
+          <form method="get" enctype="multipart/form-data">
+
+            <div class="card-body">
+              <!-- Error -->
+              {% if form.errors %}
+                <br>
+                <button type="button" class="btn btn-danger toastrDefaultError">
+                  Existen errores, click para mostrarlos
+                </button>
+              {% endif %}
+
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" name="buscar_articulo" placeholder="Artículo a buscar...">
+                <div class="input-group-append">
+                  <!-- <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span> -->
+                  <button type="submit" class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+              </div>
+  
+            </div>
+            <!-- /.card-body -->
+  
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-sm-3">
+                  <button type="submit" class="btn btn-block btn-outline-success"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+                </div>
+                <div class="col-sm-3">
+                  <a href="{% url 'listado_articulos' %}" class="btn btn-block btn-outline-warning"><i class="fa-solid fa-circle-arrow-left"></i> Cancelar</a>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- /.card -->
+      </div>
+      <!--/.col (left) -->
+    </div>
+    <!-- /.row -->
+  </div>
+{% endblock contenido %}
+    

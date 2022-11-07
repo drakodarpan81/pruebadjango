@@ -66,6 +66,10 @@ class CatProveedor(models.Model):
     def __str__(self):
         return self.nombre_proveedor
 
+    def save(self, *args, **kwargs):
+       self.nombre_proveedor = self.nombre_proveedor.upper()
+       super(CatProveedor, self).save(*args, **kwargs) # Call the real save() method
+
 
 class CatArticulo(models.Model):
     id = models.AutoField(_("id"), primary_key=True)

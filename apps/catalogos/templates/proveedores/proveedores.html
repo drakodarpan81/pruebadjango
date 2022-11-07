@@ -2,10 +2,12 @@
 {% load static %}
 {% load widget_tweaks %}
 
-{% block title %} {{title}} {% endblock title %} 
+{% block title %}
+    {{ title }}
+{% endblock title %}
 
 {% block subcategoria %}
-    <li class="breadcrumb-item active">{{subcategoria}}</li>
+    <li class="breadcrumb-item active">{{ subcategoria }}</li>
 {% endblock subcategoria %}
 
 {% block header %}{% endblock header %}
@@ -21,8 +23,9 @@
                 <div class="card card-primary">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <i class="{{icon_card}}"></i>
-                            {{title_card}} proveedores
+                            <i class="{{ icon_card }}"></i>
+                            {{ title_card }}
+                            proveedores
                         </h3>
                     </div>
                     <!-- /.card-header -->
@@ -31,97 +34,140 @@
                         <form method="post">
                             {% csrf_token %}
                             <div class="row">
-                                <div class="col-md-6">
 
+                                <div class="col-md-6">
                                     <div class="card">
                                         <div class="card-header">
                                             <h5 class="card-title">Datos del proveedor</h3>
                                         </div>
                                     </div>
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label>{{ form.nombre_proveedor.label }}
-                                            </label>
-                                            {{ form.nombre_proveedor|add_class:'form-control'|attr:'autofocus:True'|attr:'placeholder: Nombre del proveedor'|attr:'autocomplete:off' }}
+                                    <div
+                                        class="card-body">
+                                        <!-- Error -->
+                                        {% if form.errors %}
+                                            <br>
+                                                <button type="button" class="btn btn-danger toastrDefaultError">
+                                                    Existen errores, click para mostrarlos
+                                                </button>
+                                            {% endif %}
+                                            <div class="form-group">
+                                                <label>{{ form.nombre_proveedor.label }}
+                                                </label>
+                                                {{ form.nombre_proveedor|add_class:'form-control'|attr:'autofocus:True'|attr:'placeholder: Nombre del proveedor'|attr:'autocomplete:off' }}
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>{{ form.rfc_proveedor.label }}
+                                                </label>
+                                                {{ form.rfc_proveedor|add_class:'form-control'|attr:'placeholder: RFC del proveedor'|attr:'onkeyup:this.value=this.value.toUpperCase()'|attr:'autocomplete:off' }}
+                                            </div>
+
+                                            <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                                {{ form.estado|add_class:'custom-control-input'|attr:'id:customSwitch3' }}
+                                                <label class="custom-control-label" for="customSwitch3">{{ form.estado.label }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5 class="card-title">Domicilio del proveedor</h5>
+                                            </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label>{{ form.rfc_proveedor.label }}
-                                            </label>
-                                            {{ form.rfc_proveedor|add_class:'form-control'|attr:'placeholder: RFC del proveedor'|attr:'onkeyup:this.value=this.value.toUpperCase()'|attr:'autocomplete:off' }}
-                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label>{{ form.calle.label }}
+                                                </label>
+                                                {{ form.calle|add_class:'form-control'|attr:'placeholder: Calle del proveedor' }}
+                                            </div>
 
-                                        <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-                                            {{ form.estado|add_class:'custom-control-input'|attr:'id:customSwitch3' }}
-                                            <label class="custom-control-label" for="customSwitch3">{{ form.estado.label }}</label>
+                                            <div class="form-group">
+                                                <label for="inputEstimatedDuration">{{ form.numero.label }}</label>
+                                                {{ form.numero|add_class:'form-control'|attr:'id:inputEstimatedDuration'|attr:'type:number'|attr:'autocomplete:off' }}
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>{{ form.colonia.label }}
+                                                </label>
+                                                {{ form.colonia|add_class:'form-control'|attr:'placeholder: Colonia del proveedor' }}
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputEstimatedDuration">{{ form.codigo_postal.label }}</label>
+                                                {{ form.codigo_postal|add_class:'form-control'|attr:'id:inputEstimatedDuration'|attr:'type:number'|attr:'autocomplete:off'|attr:'onKeyUp:if(this.value>99999){this.value="99999";}else if(this.value<0){this.value="0";}' }}
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>{{ form.telefono.label }}
+                                                </label>
+                                                {{ form.telefono|add_class:'form-control'|attr:'placeholder: (999) 999-9999'|attr:'id:yourphone'|attr:'type:text' }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
+                                <!-- /.card-body -->
 
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h5 class="card-title">Domicilio del proveedor</h5>
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <button type="submit" class="btn btn-block btn-outline-success">
+                                                <i class="fa-solid fa-floppy-disk"></i>
+                                                Guardar</button>
                                         </div>
-                                    </div>
-
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label>{{ form.calle.label }}
-                                            </label>
-                                            {{ form.calle|add_class:'form-control'|attr:'placeholder: Calle del proveedor' }}
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="inputEstimatedDuration">{{ form.numero.label }}</label>
-                                            {{ form.numero|add_class:'form-control'|attr:'id:inputEstimatedDuration'|attr:'type:number'|attr:'autocomplete:off' }}
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>{{ form.colonia.label }}
-                                            </label>
-                                            {{ form.colonia|add_class:'form-control'|attr:'placeholder: Colonia del proveedor' }}
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="inputEstimatedDuration">{{ form.codigo_postal.label }}</label>
-                                            {{ form.codigo_postal|add_class:'form-control'|attr:'id:inputEstimatedDuration'|attr:'type:number'|attr:'autocomplete:off'|attr:'onKeyUp:if(this.value>99999){this.value="99999";}else if(this.value<0){this.value="0";}' }}
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>{{ form.telefono.label }}
-                                            </label>
-                                            {{ form.telefono|add_class:'form-control'|attr:'placeholder: (999) 999-9999'|attr:'id:yourphone'|attr:'type:text' }}
+                                        <div class="col-sm-3">
+                                            <a href="{% url 'listado_proveedores' %}" class="btn btn-block btn-outline-warning">
+                                                <i class="fa-solid fa-circle-arrow-left"></i>
+                                                Cancelar</a>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <!-- /.card-body -->
-
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa-solid fa-floppy-disk"></i>
-                                    Guardar</button>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
+                        <!-- /.card -->
                     </div>
-                    <!-- /.card -->
+                    <!--/.col (left) -->
                 </div>
-                <!--/.col (left) -->
+                <!-- /.row -->
             </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
-    {% endblock contenido %}
+            <!-- /.container-fluid -->
+        {% endblock contenido %}
 
-    {% block js %}
-        <script src="https://unpkg.com/jquery-input-mask-phone-number@1.0.15/dist/jquery-input-mask-phone-number.js"></script>
+        {% block js %}
+            <script src="https://unpkg.com/jquery-input-mask-phone-number@1.0.15/dist/jquery-input-mask-phone-number.js"></script>
+            <link rel="stylesheet" href="{% static 'CodeSeven/build/css/toastr.min.css' %}">
+                <script src="{% static 'CodeSeven/build/js/toastr.min.js' %}"></script>
 
-        <script>
-            $(document).ready(function () {
-                $('#yourphone').usPhoneFormat({format: '(xxx) xxx-xxxx'});
-            });{% if form.errors %}var errors = '';{% for field in form %}{% for error in field.errors %}errors +='{{ error }}\n'{% endfor %}{% endfor %}Swal.fire({icon: 'error', title: 'Oops...', text: errors});{% endif %}
-        </script>
-    {% endblock js %}
+                <script>
+                    $(document).ready(function () {
+                        $('#yourphone').usPhoneFormat({format: '(xxx) xxx-xxxx'});
+                    });
+
+                    $(function () {
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": true,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": true,
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
+
+                        $('.toastrDefaultError').click(function () {
+                            toastr.error('{{ form.non_field_errors }}')
+                        });
+                    });
+                </script>
+            {% endblock js %}

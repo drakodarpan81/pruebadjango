@@ -18,7 +18,7 @@ class PresentacionView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = 'Creación de una presentación'
-        print(reverse_lazy('inicio'))
+        print(reverse_lazy('dashbord'))
         return context
 
 # CURD Articulos
@@ -32,7 +32,7 @@ class ArticuloView(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context["title"] = 'Alta de articulos'
         context["title_card"] = 'Alta de'
-        context["icon_card"] = 'fa-solid fa-file-circle-plus'
+        context["icon_card"] = 'fa-solid fa-vial-circle-check'
         return context
 
     def form_valid(self, form):
@@ -60,7 +60,6 @@ class ArticuloUpdateView(LoginRequiredMixin,UpdateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        print(form.instance)
         messages.success(self.request, 'El articulo se actualizo con éxito')
         return super().form_valid(form)
     
@@ -82,32 +81,27 @@ class ProveedorView(LoginRequiredMixin, CreateView):
     model=CatProveedor
     template_name="proveedores/proveedores.html"
     form_class=ProveedorForm
-    success_url=reverse_lazy('proveedores/list_proveedores.html')
+    success_url=reverse_lazy('listado_proveedores')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = 'Alta de proveedores'
         context["title_card"] = 'Alta de'
-        context["icon_card"] = 'fa-solid fa-file-circle-plus'
+        context["icon_card"] = 'fa-solid fa-user-plus'
         context["subcategoria"] = 'Alta de proveedores'
         return context
 
-    """
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        
-        if form.is_valid():
-            print(request.POST)
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        messages.success(self.request, 'El proveedor se dio de alta con éxito')
+        return super().form_valid(form)
 
-        return render(request, self.template_name, {'form': form})
-    """
-
-class ProveedoresListView(ListView):
+class ProveedoresListView(LoginRequiredMixin, ListView):
     model = CatProveedor
-    template_name = "proveedores/list_proveedores.html"
+    template_name = "proveedores/listado_proveedores.html"
 
 
-class ProveedorUpdateView(UpdateView):
+class ProveedorUpdateView(LoginRequiredMixin, UpdateView):
     model = CatProveedor
     template_name = "proveedores/proveedores.html"
     form_class=ProveedorForm
@@ -121,8 +115,13 @@ class ProveedorUpdateView(UpdateView):
         context["subcategoria"] = 'Actualización de proveedores'
         return context
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        messages.success(self.request, 'El proveedor se actualizo con éxito')
+        return super().form_valid(form)
 
-class ProveedorDeleteView(DeleteView):
+
+class ProveedorDeleteView(LoginRequiredMixin, DeleteView):
     model = CatProveedor
     template_name = "proveedores/delete_proveedor.html"
     success_url = reverse_lazy('listado_proveedores')
