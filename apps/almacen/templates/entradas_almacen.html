@@ -9,61 +9,111 @@
     <li class="breadcrumb-item active">Entrada de almacen</li>
 {% endblock subcategoria %}
 
+{% block header %}
+    <link rel="stylesheet" href="{% static 'project/css/user_style.css' %}">
+    {% endblock header %}
 
-{% block contenido %}
-<div class="container-fluid">
-    <div class="row">
-      <!-- left column -->
-      <div class="col-md-12">
-        <!-- general form elements -->
-        <div class="card card-primary">
-          <div class="card-header">
-            <h3 class="card-title">
-              <i class="{{icon_card}}"></i> {{title_card}}
-            </h3>
-          </div>
-          <!-- /.card-header -->
-  
-          <!-- form start -->
-          <form method="get" enctype="multipart/form-data">
+    {% block buscar %}
+        <div class="row">
+            <div class="col-md-12 search">
+                <form method="get">
+                    <div class="input-group">
+                        <input class="form-control form-control-sidebar" type="search" name="buscar_articulo" placeholder="Artículo a buscar..." aria-label="Artículo a buscar..." value="{{ request.GET.buscar_articulo }}">
+                            <div class="input-group-append">
+                                <button class="btn btn-sidebar">
+                                    <i class="fas fa-search fa-fw"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            {% endblock buscar %}
 
-            <div class="card-body">
-              <!-- Error -->
-              {% if form.errors %}
-                <br>
-                <button type="button" class="btn btn-danger toastrDefaultError">
-                  Existen errores, click para mostrarlos
-                </button>
-              {% endif %}
 
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" name="buscar_articulo" placeholder="Artículo a buscar...">
-                <div class="input-group-append">
-                  <!-- <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span> -->
-                  <button type="submit" class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></button>
-                </div>
-              </div>
-  
-            </div>
-            <!-- /.card-body -->
-  
-            <div class="card-footer">
-              <div class="row">
-                <div class="col-sm-3">
-                  <button type="submit" class="btn btn-block btn-outline-success"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
-                </div>
-                <div class="col-sm-3">
-                  <a href="{% url 'listado_articulos' %}" class="btn btn-block btn-outline-warning"><i class="fa-solid fa-circle-arrow-left"></i> Cancelar</a>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-        <!-- /.card -->
-      </div>
-      <!--/.col (left) -->
-    </div>
-    <!-- /.row -->
-  </div>
-{% endblock contenido %}
-    
+            {% block contenido %}
+                <div class="container-fluid">
+                    <div
+                        class="row">
+                        <!-- left column -->
+                        <div
+                            class="col-md-12">
+                            <!-- general form elements -->
+                            <br>
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">
+                                            <i class="{{ icon_card }}"></i>
+                                            {{ title_card }}
+                                            aa
+                                        </h3>
+                                    </div>
+                                    <!-- /.card-header -->
+
+
+                                    <!-- {{ c.nombre_articulo }} -->
+                                    <section class="container">
+                                        <div class="row">
+                                            {% for c in articulos %}
+                                                <div class="d-sm-flex align-self-sm-stretch col-sm-6 col-md-6 col-lg-4">
+                                                    <div class="card m-2">
+                                                        {% if c.imagen %}
+                                                            <img src="{{MEDIA_URL}} {{ c.imagen.url }}" class="card-img-top object-fit" alt="{{ c.nombre_articulo }}"/>
+                                                        {% else %}
+                                                            <img src="{% static 'imagen_default/no-image.png' %}" class="card-img-top object-fit" alt="{{ c.nombre_articulo }}"/>
+                                                        {% endif %}
+
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">{{ c.nombre_articulo }}</h5>
+                                                            <p class="card-text">
+                                                                Lo surte el proveedor <strong>{{c.proveedor.nombre_proveedor}}</strong>
+                                                            </p>
+                                                            <a href="https://pelispop.me/" class="btn btn-warning">Dale Click</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+
+                                    </section>
+
+
+                                    <!-- form start -->
+                                    <form method="get" enctype="multipart/form-data">
+
+                                        <div
+                                            class="card-body">
+                                            <!-- Error -->
+                                            {% if form.errors %}
+                                                <br>
+                                                    <button type="button" class="btn btn-danger toastrDefaultError">
+                                                        Existen errores, click para mostrarlos
+                                                    </button>
+                                                {% endif %}
+
+
+                                            </div>
+                                            <!-- /.card-body -->
+
+                                            <div class="card-footer">
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <button type="submit" class="btn btn-block btn-outline-success">
+                                                            <i class="fa-solid fa-floppy-disk"></i>
+                                                            Guardar</button>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <a href="{% url 'listado_articulos' %}" class="btn btn-block btn-outline-warning">
+                                                            <i class="fa-solid fa-circle-arrow-left"></i>
+                                                            Cancelar</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- /.card -->
+                                </div>
+                                <!--/.col (left) -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                    {% endblock contenido %}

@@ -54,8 +54,8 @@ urlpatterns = [
     path('catalogos/delete_proveedor/<int:pk>/', ProveedorDeleteView.as_view(), name='delete_proveedor'),
 
     # Control de almacen
-    path('almacen/entradas', EntradasAlmacenViews.as_view(), name='entradas_almacen'),
-    # path('almacen/buscar_articulo', listar_articulos, name='listar_articulos'),
+    #path('almacen/entradas', EntradasAlmacenViews.as_view(), name='entradas_almacen'),
+    path('almacen/entradas', listar_articulos, name='entradas_almacen'),
     
     # Summernote
     path('summernote/', include('django_summernote.urls')),

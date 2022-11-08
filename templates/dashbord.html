@@ -45,8 +45,8 @@
                             <a href="{% url 'inicio' %}" class="nav-link">Inicio</a>
                         </li>
                         <!-- <li class="nav-item d-none d-sm-inline-block">
-                                <a href="#" class="nav-link">Contact</a>
-                              </li> -->
+                                                                                <a href="#" class="nav-link">Contact</a>
+                                                                              </li> -->
                     </ul>
 
                     <!-- Right navbar links -->
@@ -74,10 +74,10 @@
                         </li>
 
                         <!-- <li class="nav-item">
-                                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                                  <i class="fas fa-th-large"></i>
-                                </a>
-                              </li> -->
+                                                                                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                                                                                  <i class="fas fa-th-large"></i>
+                                                                                </a>
+                                                                              </li> -->
                     </ul>
                 </nav>
                 <!-- /.navbar -->
@@ -156,7 +156,8 @@
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="{% url 'listado_proveedores' %}" class="nav-link">
+                                            <a
+                                                href="{% url 'listado_proveedores' %}" class="nav-link">
                                                 <!-- <i class="fa-solid fa-dolly"></i> -->
                                                 <i class="fa-solid fa-user-gear"></i>
                                                 <p>Proveedores</p>
@@ -176,14 +177,16 @@
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
-                                            <a href="{% url 'entradas_almacen' %}" class="nav-link">
+                                            <a
+                                                href="{% url 'entradas_almacen' %}" class="nav-link">
                                                 <!-- <i class="fa-solid fa-person-walking-arrow-right"></i> -->
                                                 <i class="fa-solid fa-boxes-packing"></i>
                                                 <p>Entradas</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="{% url 'listado_proveedores' %}" class="nav-link">
+                                            <a
+                                                href="{% url 'listado_proveedores' %}" class="nav-link">
                                                 <!-- <i class="fa-solid fa-dolly"></i> -->
                                                 <i class="fa-solid fa-people-carry-box"></i>
                                                 <p>Salidas</p>
@@ -225,7 +228,7 @@
                         <!-- /.container-fluid -->
                     </div>
 
-                    <section class="content"> {% block contenido %}{% endblock contenido %}
+                    <section class="content"> {% block buscar %}{% endblock buscar %}{% block contenido %}{% endblock contenido %}
 
                         </section>
                     </div>
@@ -260,7 +263,7 @@
 
                 <!-- Sweetalert -->
                 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                
+
                 {% block js %}{% endblock js %}
 
 

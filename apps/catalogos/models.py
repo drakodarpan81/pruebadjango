@@ -84,7 +84,7 @@ class CatArticulo(models.Model):
     requisicion = models.CharField(
         _("Requisición"), max_length=30, blank=False, default='')
     imagen = models.ImageField(
-        _("Imagen del producto"), upload_to='articulos/', blank=True, null=True, max_length=200)
+        _("Imagen del producto"), upload_to='articulos/', blank=True, null=True, default='default/no-image.png')
     estado = models.BooleanField(_("Activo / Inactivo"), default=True)
     observacion = models.TextField(_("Observación"))
     fecha_alta = models.DateTimeField(
@@ -97,7 +97,7 @@ class CatArticulo(models.Model):
         verbose_name_plural = _("CatArticulos")
 
     def __str__(self):
-        return 'Articulo {} del proveedor {}'.format(self.nombre_articulo, self.proveedor.nombre_proveedor)
+        return self.nombre_articulo
 
     def save(self):
         self.nombre_articulo = self.nombre_articulo.upper()
