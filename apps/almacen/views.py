@@ -1,7 +1,5 @@
+from datetime import datetime
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView, UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
 # from django.db.models import Q
 
 # Catálogo articulos
@@ -9,22 +7,28 @@ from apps.catalogos.models import CatArticulo
 from .forms import AlmacenArticulosForm
 
 # Create your views here.
-
-class EntradasAlmacenViews(LoginRequiredMixin,ListView):
-    template_name = "manejo_almacen.html"
-    model = CatArticulo
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title_card"] = 'Manejo del almacen'
-        context["icon_card"] = 'fa-solid fa-person-military-to-person'
-        return context
-
+def entradasalmacen(request):
+    articulos = CatArticulo.objects.all()
+    return render(request, "manejo_almacen.html", {'articulos':articulos})
 
 def listar_articulos(request, id_articulo):
     articulos = CatArticulo.objects.filter(id=id_articulo).first()
     form = AlmacenArticulosForm(instance=articulos)
-
+ 
     return render(request, 'entradas_almacen_Old.html', {'form':form, 'articulos':articulos} )
 
+def actualizar_articulo(request, id_articulo):
+    dFechaEntrada = request.POST["fecha_entrada_almacen"]
+    fecha_entrada = datetime.strptime(dFechaEntrada, "%d/%m/%Y %H:%M").strftime("%Y-%m-%d %H:%M")
+    nCantidad = int(request.POST["cantidad"])
+    sRequisicion = request.POST["requisicion"]
+    id = int(request.POST["id"])
 
+    articulo = CatArticulo.objects.get(id=id)
+    articulo.fecha_entrada_almacen = fecha_entrada
+    articulo.cantidad = articulo.cantidad + nCantidad
+    articulo.requisicion = sRequisicion
+    articulo.save()
+    
+    articulos = CatArticulo.objects.all()
+    return render(request, 'manejo_almacen.html', {'articulos':articulos})
