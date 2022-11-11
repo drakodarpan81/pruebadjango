@@ -6,20 +6,17 @@
 {% endblock title %}
 
 {% block subcategoria %}
-    <li class="breadcrumb-item active">Listado articulos</li>
+    <li class="breadcrumb-item active">{{title_card}}</li>
 {% endblock subcategoria %}
 
 
 {% block contenido %}
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Listado de artículos</h3>
+            <h3 class="card-title"><i class="{{icon_card}}"></i> {{title_card}}</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            <a href="{% url 'catalogo_articulos' %}" class="btn btn-block btn-outline-primary">
-                <i class="fa-solid fa-cart-plus"></i>
-                Agregar articulos</a>
             <br>
                 <table id="listarticulos" class="table table-bordered table-striped">
                     <thead>
@@ -27,7 +24,6 @@
                             <th>Nombre del articulo</th>
                             <th>Cantidad</th>
                             <th>Presentación(s)</th>
-                            <th>Proveedor</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
@@ -41,15 +37,13 @@
                                 </td>
                                 <td>{{ c.presentacion }}
                                 </td>
-                                <td>{{ c.proveedor }}
-                                </td>
                                 <td>
-                                    <a href="{% url 'editar_articulos' c.id %}" class="btn btn-block btn-outline-warning">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                        Editar</a>
-                                    <a href="{% url 'delete_articulos' c.id %}" class="btn btn-block btn-outline-danger">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                        Borrar</a>
+                                    <a href="{% url 'entrada_almacen' c.id %}" class="btn btn-block btn-outline-info">
+                                        <i class="fa-solid fa-person-walking-luggage"></i>
+                                        Entrada a almacen</a>
+                                    <a href="{% url 'delete_articulos' c.id %}" class="btn btn-block btn-outline-secondary">
+                                        <i class="fa-solid fa-people-carry-box"></i>
+                                        Salida del almacen</a>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -78,22 +72,6 @@
                         <script>
                             $(document).ready(function () {
                                 $('#listarticulos').DataTable({
-                                    dom: 'Bfrtlip',
-                                    buttons: [
-                                        {
-                                            extend: 'pdfHtml5',
-                                            text: '<i class="fa-solid fa-file-pdf"></i>',
-                                            titleAttr: 'Exportar a PDF',
-                                            className: 'btn btn-danger',
-                                            title: 'Listado de articulos'
-                                        }, {
-                                            extend: 'excelHtml5',
-                                            text: '<i class="fa-regular fa-file-excel"></i>',
-                                            titleAttr: 'Exportar a Excel',
-                                            className: 'btn btn-success',
-                                            title: 'Listado de articulos'
-                                        },
-                                    ],
                                     language: {
                                         "processing": "Procesando...",
                                         "lengthMenu": "Mostrar _MENU_ registros",

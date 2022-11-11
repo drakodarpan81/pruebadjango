@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 
-
+# Catalogo de presentación (Pieza, gr, Kg, etc)
 class CatPresentacion(models.Model):
     id = models.AutoField(_("id"), primary_key=True)
     nombre_presentacion = models.CharField(
@@ -39,7 +39,7 @@ class CatCategoria(models.Model):
     def __str__(self):
         return self.nombre_categoria
 
-
+# Catalogo de proveedores
 class CatProveedor(models.Model):
     id = models.AutoField(_("id"), primary_key=True)
     nombre_proveedor = models.CharField(
@@ -70,7 +70,7 @@ class CatProveedor(models.Model):
        self.nombre_proveedor = self.nombre_proveedor.upper()
        super(CatProveedor, self).save(*args, **kwargs) # Call the real save() method
 
-
+# Catalogo de articulos
 class CatArticulo(models.Model):
     id = models.AutoField(_("id"), primary_key=True)
     nombre_articulo = models.CharField(
@@ -87,6 +87,8 @@ class CatArticulo(models.Model):
         _("Imagen del producto"), upload_to='articulos/', blank=True, null=True, default='default/no-image.png')
     estado = models.BooleanField(_("Activo / Inactivo"), default=True)
     observacion = models.TextField(_("Observación"))
+    fecha_entrada_almacen = models.DateTimeField(_("Fecha entrada al almacen"), default='1981-12-10')
+    fecha_salida_almacen = models.DateTimeField(_("Fecha de salida del almacen"), default='1981-12-10')
     fecha_alta = models.DateTimeField(
         _("Fecha de alta de la mercancía"), auto_now_add=True)
     fecha_modificacion = models.DateTimeField(
