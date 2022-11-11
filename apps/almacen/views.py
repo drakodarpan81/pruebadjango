@@ -22,7 +22,6 @@ class EntradasAlmacenViews(LoginRequiredMixin,ListView):
 
 
 def listar_articulos(request, id_articulo):
-    # buscar_articulo = request.GET.get("buscar_articulo")
     articulos = CatArticulo.objects.filter(id=id_articulo).first()
     form = AlmacenArticulosForm(instance=articulos)
 

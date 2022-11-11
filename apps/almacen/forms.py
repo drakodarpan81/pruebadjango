@@ -1,5 +1,6 @@
 from distutils.text_file import TextFile
 from django import forms
+from django.contrib.admin import widgets
 
 # Modelos
 from apps.catalogos.models import CatArticulo
@@ -10,3 +11,6 @@ class AlmacenArticulosForm(forms.ModelForm):
         model = CatArticulo
         fields = ['imagen', 'nombre_articulo', 'cantidad', 'requisicion', 'fecha_entrada_almacen']
 
+    def __init__(self, *args, **kwargs):
+        super(AlmacenArticulosForm, self).__init__(*args, **kwargs)
+        self.fields['fecha_entrada_almacen'].widget.attrs['readonly'] = True

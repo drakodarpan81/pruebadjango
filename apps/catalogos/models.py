@@ -87,8 +87,8 @@ class CatArticulo(models.Model):
         _("Imagen del producto"), upload_to='articulos/', blank=True, null=True, default='default/no-image.png')
     estado = models.BooleanField(_("Activo / Inactivo"), default=True)
     observacion = models.TextField(_("Observación"))
-    fecha_entrada_almacen = models.DateTimeField(_("Fecha entrada al almacen"), default='1981-12-10')
-    fecha_salida_almacen = models.DateTimeField(_("Fecha de salida del almacen"), default='1981-12-10')
+    fecha_entrada_almacen = models.DateTimeField(_("Fecha entrada al almacen"), default='1981-12-10T00:00:00')
+    fecha_salida_almacen = models.DateTimeField(_("Fecha de salida del almacen"), default='1981-12-10T00:00:00')
     fecha_alta = models.DateTimeField(
         _("Fecha de alta de la mercancía"), auto_now_add=True)
     fecha_modificacion = models.DateTimeField(
