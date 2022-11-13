@@ -22,9 +22,7 @@ from django.conf.urls.static import static
 from apps.inicio.views import InicioView
 from apps.login.views import *
 from apps.home.views import HomeViews
-from apps.almacen.views import *
-from apps.catalogos.views import *
-from apps.almacen.views import *
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -37,26 +35,10 @@ urlpatterns = [
     path('logout/', logout_request, name='logout'),
     
     # Catalogos
-    path('catalogos/presentacion', PresentacionView.as_view(), name='catalogo_presentacion'),
-    path('catalogos/articulos', ArticuloView.as_view(), name='catalogo_articulos'),
-    path('catalogos/proveedores', ProveedorView.as_view(), name='catalogo_proveedores'),
+    path('catalogos/', include('apps.catalogos.urls')),
 
-    # Listados
-    path('catalogos/listado_articulos', ArticuloListView.as_view(), name='listado_articulos'),
-    path('catalogos/listado_proveedores', ProveedoresListView.as_view(), name='listado_proveedores'),
-
-    # Editar
-    path('catalogos/edit_articulos/<int:pk>/', ArticuloUpdateView.as_view(), name='editar_articulos'),
-    path('catalogos/edit_proveedor/<int:pk>/', ProveedorUpdateView.as_view(), name='editar_proveedor'),
-
-    # Eliminar
-    path('catalogos/delete_articulos/<int:pk>/', ArticuloDeleteView.as_view(), name='delete_articulos'),
-    path('catalogos/delete_proveedor/<int:pk>/', ProveedorDeleteView.as_view(), name='delete_proveedor'),
-
-    # Control de almacen
-    path('almacen/', entradasalmacen, name='opcion_almacen'),
-    path('almacen/entradas/<int:id_articulo>', listar_articulos, name='entrada_almacen'),
-    path('almacen/entradas/actualizar/<int:id_articulo>', actualizar_articulo, name='actualizar_entrada_almacen'),
+    # Almacen
+    path('almacen/', include('apps.almacen.urls')),
     
     # Summernote
     path('summernote/', include('django_summernote.urls')),
