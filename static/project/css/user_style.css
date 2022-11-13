@@ -4,8 +4,9 @@ body {
 }
 
 .color-h1 {
-    color: rgba(243, 223, 39, 0.877);
+    color: rgba(195, 204, 73, 0.877);
 }
+
 .container {
     background: #fff !important;
     border: none;
