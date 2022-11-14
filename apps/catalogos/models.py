@@ -3,6 +3,8 @@ from email.policy import default
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from simple_history.models import HistoricalRecords
+
 # Create your models here.
 
 # Catalogo de presentación (Pieza, gr, Kg, etc)
@@ -14,6 +16,7 @@ class CatPresentacion(models.Model):
         _("Fecha de alta de la presentación"), auto_now_add=True)
     fecha_modificacion = models.DateTimeField(
         _("Fecha de modificación de la presentación"), auto_now=True)
+    # history = HistoricalRecords()
 
     class Meta:
         verbose_name = _("CatPresentacion")
@@ -22,7 +25,7 @@ class CatPresentacion(models.Model):
     def __str__(self):
         return self.nombre_presentacion
 
-
+"""
 class CatCategoria(models.Model):
     id = models.AutoField(_("id"), primary_key=True)
     nombre_categoria = models.CharField(
@@ -31,6 +34,7 @@ class CatCategoria(models.Model):
         _("Fecha de alta de la categoría"), auto_now_add=True)
     fecha_modificacion = models.DateTimeField(
         _("Fecha de modificación de la categoría"), auto_now=True)
+    history = HistoricalRecords()
 
     class Meta:
         verbose_name = _("CatCategoria")
@@ -38,6 +42,7 @@ class CatCategoria(models.Model):
 
     def __str__(self):
         return self.nombre_categoria
+"""
 
 # Catalogo de proveedores
 class CatProveedor(models.Model):
@@ -58,6 +63,7 @@ class CatProveedor(models.Model):
         _("Fecha de alta de la mercancía"), auto_now_add=True)
     fecha_modificacion = models.DateTimeField(
         _("Fecha de modificación de la mercancía"), auto_now=True)
+    history = HistoricalRecords()
 
     class Meta:
         verbose_name = _("CatProveedor")
@@ -93,6 +99,7 @@ class CatArticulo(models.Model):
         _("Fecha de alta de la mercancía"), auto_now_add=True)
     fecha_modificacion = models.DateTimeField(
         _("Fecha de modificación de la mercancía"), auto_now=True)
+    history = HistoricalRecords()
 
     class Meta:
         verbose_name = _("CatArticulo")

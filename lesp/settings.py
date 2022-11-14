@@ -60,6 +60,7 @@ PROJECT_APPS = [
 EXTERNAL_APPS = [
     'widget_tweaks',
     'django_summernote',
+    'simple_history',
 ]
 
 INSTALLED_APPS = CORE_APPS + PROJECT_APPS + EXTERNAL_APPS
@@ -72,6 +73,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Model History
+    'simple_history.middleware.HistoryRequestMiddleware',
 ]
 
 ROOT_URLCONF = 'lesp.urls'

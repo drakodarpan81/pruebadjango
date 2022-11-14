@@ -6,14 +6,16 @@
 {% endblock title %}
 
 {% block subcategoria %}
-    <li class="breadcrumb-item active">{{title_card}}</li>
+    <li class="breadcrumb-item active">{{ title_card }}</li>
 {% endblock subcategoria %}
 
 
 {% block contenido %}
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title"><i class="{{icon_card}}"></i> {{title_card}}</h3>
+            <h3 class="card-title">
+                <i class="{{ icon_card }}"></i>
+                {{ title_card }}</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -41,7 +43,7 @@
                                     <a href="{% url 'entrada_almacen' c.id %}" class="btn btn-block btn-outline-info">
                                         <i class="fa-solid fa-person-walking-luggage"></i>
                                         Entrada a almacen</a>
-                                    <a href="{% url 'delete_articulos' c.id %}" class="btn btn-block btn-outline-secondary">
+                                    <a href="{% url 'salida_almacen' c.id %}" class="btn btn-block btn-outline-secondary">
                                         <i class="fa-solid fa-people-carry-box"></i>
                                         Salida del almacen</a>
                                 </td>
