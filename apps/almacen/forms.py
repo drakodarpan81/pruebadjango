@@ -9,7 +9,7 @@ class AlmacenArticulosForm(forms.ModelForm):
     
     class Meta:
         model = CatArticulo
-        fields = ['imagen', 'nombre_articulo', 'cantidad', 'requisicion', 'fecha_entrada_almacen', 'fecha_salida_almacen']
+        fields = ['imagen', 'nombre_articulo', 'cantidad', 'requisicion', 'fecha_entrada_almacen', 'fecha_salida_almacen', 'observacion',]
 
     def __init__(self, *args, **kwargs):
         super(AlmacenArticulosForm, self).__init__(*args, **kwargs)

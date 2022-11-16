@@ -13,7 +13,7 @@ class PresentacionView(LoginRequiredMixin, CreateView):
     model = CatPresentacion
     template_name = "presentacion.html"
     form_class = PresentacionForm
-    success_url = reverse_lazy('inicio')
+    success_url = reverse_lazy('dashbord')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -26,8 +26,8 @@
                 <div class="card card-primary">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <i class="fa-solid fa-person-walking-luggage"></i>
-                            Entradas de almacen
+                            <i class="fa-solid fa-people-carry-box"></i>
+                            Salidas del almacen
                         </h3>
                     </div>
                     <!-- /.card-header -->
@@ -77,59 +77,105 @@
                                                         {{ form.cantidad|add_class:'form-control'|attr:'id:inputEstimatedDuration'|attr:'type:number'|attr:'autocomplete:off'|attr:'value:0' }}
                                                     </li>
 
-                                                    <br><br>
-
-                                                    <div class="footer d-flex flex-column mb-6">
-                                                        <div class="row">
-                                                            <div class="col-sm-6">
-                                                                <button type="submit" class="btn btn-block btn-outline-success">
-                                                                    <i class="fa-solid fa-floppy-disk"></i>
-                                                                    Guardar</button>
+                                                    <li>
+                                                        <strong>
+                                                            <div class="form-group">
+                                                                <b>{{ form.observacion.label }}
+                                                                </b>
                                                             </div>
-                                                            <div class="col-sm-6">
-                                                                <a href="{% url 'opcion_almacen' %}" style="color: red;">
-                                                                    <i class="fa-solid fa-circle-arrow-left"></i>
-                                                                    Cancelar</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                        </strong>
+                                                        {{ form.observacion|add_class:'form-control'|attr:'rows:4' }}
+                                                    </li>
 
-                                                </form>
-                                            </ul>
+                                                    <br>
+                                                        <br>
+
+                                                            <div class="footer d-flex flex-column mb-6">
+                                                                <div class="row">
+                                                                    <div class="col-sm-6">
+                                                                        <button type="submit" class="btn btn-block btn-outline-success">
+                                                                            <i class="fa-solid fa-floppy-disk"></i>
+                                                                            Guardar</button>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <a href="{% url 'opcion_almacen' %}" style="color: red;">
+                                                                            <i class="fa-solid fa-circle-arrow-left"></i>
+                                                                            Cancelar</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </form>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    {% if articulos.imagen %}
+                                                        <img src="{{ MEDIA_URL }} {{ articulos.imagen.url }}" class="card-img-top object-fit" alt="{{ articulos.nombre_articulo }}" width="90%" height="95%"/>
+                                                    {% else %}
+                                                        <img src="{% static 'imagen_default/no-image.png' %}" class="card-img-top object-fit" alt="{{ articulos.nombre_articulo }}" width="90%" height="95%"/>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-md-7">
-                                            {% if articulos.imagen %}
-                                                <img src="{{ MEDIA_URL }} {{ articulos.imagen.url }}" class="card-img-top object-fit" alt="{{ articulos.nombre_articulo }}" width="90%" height="95%"/>
-                                            {% else %}
-                                                <img src="{% static 'imagen_default/no-image.png' %}" class="card-img-top object-fit" alt="{{ articulos.nombre_articulo }}" width="90%" height="95%"/>
-                                            {% endif %}
-                                        </div>
+
                                     </div>
                                 </div>
 
                             </div>
+                            <!-- /.card -->
                         </div>
-
+                        <!--/.col (left) -->
                     </div>
-                    <!-- /.card -->
+                    <!-- /.row -->
                 </div>
-                <!--/.col (left) -->
-            </div>
-            <!-- /.row -->
-        </div>
-    {% endblock contenido %}
+            {% endblock contenido %}
 
-    {% block js %}
-        <script src="{% static 'input-number/src/bootstrap-input-spinner.js' %}"></script>
-        <script src="{% static 'home/plugins/bs-custom-file-input/bs-custom-file-input.min.js' %}"></script>
+            {% block js %}
+                <script src="{% static 'input-number/src/bootstrap-input-spinner.js' %}"></script>
+                <script src="{% static 'home/plugins/bs-custom-file-input/bs-custom-file-input.min.js' %}"></script>
 
-        <!-- Popperjs -->
-        <script src="{% static 'calendario/js/popper.min.js' %}" crossorigin="anonymous"></script>
-        <!-- Tempus Dominus JavaScript -->
-        <script src="{% static 'calendario/js/tempus-dominus.js' %}" crossorigin="anonymous"></script>
+                <!-- Popperjs -->
+                <script src="{% static 'calendario/js/popper.min.js' %}" crossorigin="anonymous"></script>
+                <!-- Tempus Dominus JavaScript -->
+                <script src="{% static 'calendario/js/tempus-dominus.js' %}" crossorigin="anonymous"></script>
 
-        <!-- Tempus Dominus Styles -->
-        <link href="{% static 'calendario/css/tempus-dominus.css' %}" rel="stylesheet" crossorigin="anonymous">
-            <script src="{% static 'project/js/link.js' %}"></script>
+                <!-- Tempus Dominus Styles -->
+                <link href="{% static 'calendario/css/tempus-dominus.css' %}" rel="stylesheet" crossorigin="anonymous">
+                    <script>
+                        $(document).ready(function () {
+                            $("input\[type='number'\]").inputSpinner();
+
+                            // Vanilla JS
+                            const td = new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'));
+                            td.dates.formatInput = function (date) {
+                                {
+                                    return moment(date).format('DD/MM/YYYY HH:mm')
+                                }
+                            }
+
+                            new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {
+                                localization: {
+                                    dayViewHeaderFormat: {
+                                        month: 'long',
+                                        year: '2-digit'
+                                    },
+                                    locale: 'es',
+                                    startOfTheWeek: 0
+                                }
+                            });
+                        });
+                        
+                {% if messages %}
+                    {% for m in messages %}
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: '{{ m }}',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    {% endfor %}
+                {% endif %}
+            </script>
 
         {% endblock js %}

@@ -25,6 +25,11 @@ class CatPresentacion(models.Model):
     def __str__(self):
         return self.nombre_presentacion
 
+    def save(self, *args, **kwargs):
+       self.nombre_presentacion = self.nombre_presentacion.upper()
+       super(CatPresentacion, self).save(*args, **kwargs) # Call the real save() method
+
+
 """
 class CatCategoria(models.Model):
     id = models.AutoField(_("id"), primary_key=True)
@@ -45,6 +50,8 @@ class CatCategoria(models.Model):
 """
 
 # Catalogo de proveedores
+
+
 class CatProveedor(models.Model):
     id = models.AutoField(_("id"), primary_key=True)
     nombre_proveedor = models.CharField(
@@ -73,10 +80,13 @@ class CatProveedor(models.Model):
         return self.nombre_proveedor
 
     def save(self, *args, **kwargs):
-       self.nombre_proveedor = self.nombre_proveedor.upper()
-       super(CatProveedor, self).save(*args, **kwargs) # Call the real save() method
+        self.nombre_proveedor = self.nombre_proveedor.upper()
+        # Call the real save() method
+        super(CatProveedor, self).save(*args, **kwargs)
 
 # Catalogo de articulos
+
+
 class CatArticulo(models.Model):
     id = models.AutoField(_("id"), primary_key=True)
     nombre_articulo = models.CharField(
@@ -93,8 +103,9 @@ class CatArticulo(models.Model):
         _("Imagen del producto"), upload_to='articulos/', blank=True, null=True, default='default/no-image.png')
     estado = models.BooleanField(_("Activo / Inactivo"), default=True)
     observacion = models.TextField(_("Observación"))
-    fecha_entrada_almacen = models.DateTimeField(_("Fecha entrada al almacen"), default='1981-12-10T00:00:00')
-    fecha_salida_almacen = models.DateTimeField(_("Fecha de salida del almacen"), default='1981-12-10T00:00:00')
+    fecha_entrada_almacen = models.DateTimeField(_("Fecha entrada al almacen"), default="1900-01-01T00:00")
+    fecha_salida_almacen = models.DateTimeField(
+        _("Fecha de salida del almacen"), default="1900-01-01T00:00")
     fecha_alta = models.DateTimeField(
         _("Fecha de alta de la mercancía"), auto_now_add=True)
     fecha_modificacion = models.DateTimeField(
