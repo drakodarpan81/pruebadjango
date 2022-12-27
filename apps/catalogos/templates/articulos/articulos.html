@@ -59,6 +59,11 @@
                   </div>
 
                   <div class="form-group">
+                    <label for="inputEstimatedDuration">{{form.stock_minimo.label}}</label>
+                    {{form.stock_minimo|add_class:'form-control'|attr:'id:inputEstimatedDuration'|attr:'type:number'|attr:'autocomplete:off'}}
+                  </div>
+
+                  <div class="form-group">
                     <label for="inputEstimatedDuration">{{form.presentacion.label}}</label>
                     {{form.presentacion|add_class:'form-control'|attr:'id:inputEstimatedDuration'|attr:'type:number'}}
                   </div>

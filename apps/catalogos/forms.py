@@ -18,7 +18,7 @@ class ArticuloForm(forms.ModelForm):
 
     class Meta:
         model = CatArticulo
-        fields = ['nombre_articulo', 'descripcion_articulo', 'cantidad', 'presentacion', 'proveedor', 'imagen', 'estado', ]
+        fields = ['nombre_articulo', 'descripcion_articulo', 'cantidad', 'presentacion', 'proveedor', 'imagen', 'estado', 'stock_minimo', ]
         summernote_fields = ('descripcion_articulo', )
 
     def __init__(self, *args, **kwargs):

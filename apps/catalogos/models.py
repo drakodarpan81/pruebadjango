@@ -85,8 +85,6 @@ class CatProveedor(models.Model):
         super(CatProveedor, self).save(*args, **kwargs)
 
 # Catalogo de articulos
-
-
 class CatArticulo(models.Model):
     id = models.AutoField(_("id"), primary_key=True)
     nombre_articulo = models.CharField(
@@ -103,6 +101,7 @@ class CatArticulo(models.Model):
         _("Imagen del producto"), upload_to='articulos/', blank=True, null=True, default='default/no-image.png')
     estado = models.BooleanField(_("Activo / Inactivo"), default=True)
     observacion = models.TextField(_("Observación"))
+    stock_minimo = models.PositiveIntegerField(_("Stock"), default=0)
     fecha_entrada_almacen = models.DateTimeField(_("Fecha entrada al almacen"), default="1900-01-01T00:00")
     fecha_salida_almacen = models.DateTimeField(
         _("Fecha de salida del almacen"), default="1900-01-01T00:00")

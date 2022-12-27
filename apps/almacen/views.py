@@ -1,8 +1,12 @@
 from datetime import datetime
+from django.conf import settings
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import get_template
+
 from django.shortcuts import render
-# from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.utils.html import strip_tags
 
 # Catálogo articulos
 from apps.catalogos.models import CatArticulo
@@ -72,7 +76,29 @@ def restar_inventario_articulo(request, id_articulo):
     else:
         articulo.cantidad = articulo.cantidad - nCantidad
         articulo.save()
+
+        if articulo.cantidad < articulo.stock_minimo:
+            enviarCorreo(articulo.descripcion_articulo, articulo.imagen)
+
         messages.add_message(request=request, level=messages.SUCCESS, message="Se actualizo correctamente el inventario del articulo.")
     
     articulos = CatArticulo.objects.all()
     return render(request, 'manejo_almacen.html', {'articulos':articulos})
+
+def enviarCorreo(descripcion_articulo, img):
+    # email_almacen.html
+    template = get_template('email/email_almacen.html')
+    content = template.render({
+        'descripcion_articulo': strip_tags(descripcion_articulo),
+        'imagen': img,
+    })
+
+    msg = EmailMultiAlternatives(
+        "Articulo agotado",
+        'Artículo bajo de stock',
+        settings.EMAIL_HOST_USER,
+        ['drakodarpan@gmail.com']
+    )
+
+    msg.attach_alternative(content, 'text/html')
+    msg.send()

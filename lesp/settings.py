@@ -15,6 +15,7 @@ from django.urls import reverse_lazy
 
 import lesp.db as db
 import environ
+import json
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -162,3 +163,15 @@ LOGIN_URL = 'login'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
+
+# Email config
+EMAIL_SETTINGS_FILE = BASE_DIR / 'email_settings.json'
+with open(EMAIL_SETTINGS_FILE) as data_file:
+    email_settings = json.load(data_file)
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_USE_TLS = email_settings['EMAIL_USE_TLS_ALMACEN'],
+EMAIL_HOST = email_settings['EMAIL_HOST_ALMACEN'],
+EMAIL_HOST_USER = email_settings['EMAIL_HOST_USER_ALMACEN'],
+EMAIL_HOST_PASSWORD = email_settings['EMAIL_HOST_PASSWORD_ALMACEN'],
+EMAIL_PORT = email_settings['EMAIL_PORT_ALMACEN']
