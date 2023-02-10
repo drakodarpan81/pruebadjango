@@ -56,6 +56,8 @@ PROJECT_APPS = [
     'apps.home',
     'apps.login',
     'apps.catalogos',
+    'apps.usuarios',
+    'apps.personal',
 ]
 
 EXTERNAL_APPS = [
@@ -105,7 +107,7 @@ WSGI_APPLICATION = 'lesp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = db.POSTGRESQL
+DATABASES = db.SQLITE
 
 
 # Password validation
@@ -165,13 +167,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
 
 # Email config
+"""
 EMAIL_SETTINGS_FILE = BASE_DIR / 'email_settings.json'
 with open(EMAIL_SETTINGS_FILE) as data_file:
     email_settings = json.load(data_file)
+"""
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_USE_TLS = email_settings['EMAIL_USE_TLS_ALMACEN'],
-EMAIL_HOST = email_settings['EMAIL_HOST_ALMACEN'],
-EMAIL_HOST_USER = email_settings['EMAIL_HOST_USER_ALMACEN'],
-EMAIL_HOST_PASSWORD = email_settings['EMAIL_HOST_PASSWORD_ALMACEN'],
-EMAIL_PORT = email_settings['EMAIL_PORT_ALMACEN']

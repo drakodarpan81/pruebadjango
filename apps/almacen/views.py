@@ -78,19 +78,18 @@ def restar_inventario_articulo(request, id_articulo):
         articulo.save()
 
         if articulo.cantidad < articulo.stock_minimo:
-            enviarCorreo(articulo.descripcion_articulo, articulo.imagen)
+            enviarCorreo(articulo.descripcion_articulo)
 
         messages.add_message(request=request, level=messages.SUCCESS, message="Se actualizo correctamente el inventario del articulo.")
     
     articulos = CatArticulo.objects.all()
     return render(request, 'manejo_almacen.html', {'articulos':articulos})
 
-def enviarCorreo(descripcion_articulo, img):
+def enviarCorreo(descripcion_articulo):
     # email_almacen.html
     template = get_template('email/email_almacen.html')
     content = template.render({
         'descripcion_articulo': strip_tags(descripcion_articulo),
-        'imagen': img,
     })
 
     msg = EmailMultiAlternatives(
