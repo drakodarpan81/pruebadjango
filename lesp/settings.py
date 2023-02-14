@@ -57,7 +57,6 @@ PROJECT_APPS = [
     'apps.login',
     'apps.catalogos',
     'apps.usuarios',
-    'apps.personal',
 ]
 
 EXTERNAL_APPS = [
