@@ -1,0 +1,35 @@
+{% extends "dashbord.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+    Carrito de materiales
+{% endblock title %}
+
+{% block subcategoria %}
+    <li class="breadcrumb-item active">Carro de materiales</li>
+{% endblock subcategoria %}
+
+{% block header %}
+    <link rel="stylesheet" href="{% static 'car_materiales/css/style.css' %}"/>
+{% endblock header %}
+
+{% block contenido %}
+    <div class="productContainer">
+        <div class="thumbnail">
+            
+        </div>
+
+        <div class="action">
+
+            <p>Nombre</p>
+
+            <p>$ 1000.00</p>
+
+            <button>Add to Cart</button>
+
+        </div>
+    
+
+    </div> 
+{% endblock contenido %}

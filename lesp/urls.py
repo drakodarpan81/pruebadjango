@@ -39,6 +39,9 @@ urlpatterns = [
 
     # Almacen
     path('almacen/', include('apps.almacen.urls')),
+
+    # Carrito de compras
+    path('carrito/', include('apps.car_material.urls')),
     
     # Summernote
     path('summernote/', include('django_summernote.urls')),

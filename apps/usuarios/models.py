@@ -13,7 +13,7 @@ class CatUsuario(models.Model):
     nota_buena = models.BooleanField(_("Buena / Mala"))
     cedula = models.PositiveIntegerField(_("Cédula"))
     email = models.EmailField(_("Email"), max_length=254)
-    rfc = models.CharField(_("RFC"), max_length=15, unique=True, blank=False, default="##########")
+    rfc = models.CharField(_("RFC"), max_length=15, unique=True, blank=False, default="#")
     history = HistoricalRecords()
 
     class Meta:

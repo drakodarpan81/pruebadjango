@@ -57,6 +57,7 @@ PROJECT_APPS = [
     'apps.login',
     'apps.catalogos',
     'apps.usuarios',
+    'apps.car_material',
 ]
 
 EXTERNAL_APPS = [
@@ -172,3 +173,9 @@ with open(EMAIL_SETTINGS_FILE) as data_file:
     email_settings = json.load(data_file)
 """
 
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = "gestorsistemaslesp@gmail.com"
+EMAIL_HOST_PASSWORD = "rxxydpvtmrccaouq"
+EMAIL_PORT = 587
