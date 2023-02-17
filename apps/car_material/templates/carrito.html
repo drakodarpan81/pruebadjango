@@ -10,26 +10,40 @@
     <li class="breadcrumb-item active">Carro de materiales</li>
 {% endblock subcategoria %}
 
-{% block header %}
-    <link rel="stylesheet" href="{% static 'car_materiales/css/style.css' %}"/>
-{% endblock header %}
+{% block header %}{% endblock header %}
 
 {% block contenido %}
-    <div class="productContainer">
-        <div class="thumbnail">
-            
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Material de laboratorio</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="row mt-4">
+                                {% for c in object_list %}
+                                    <div class="col-sm-4">
+                                        <div class="position-relative text-center">
+                                            <img src="{{ c.imagen.url }}" alt="" class="img-fluid">
+                                                <p>{{ c.nombre_articulo }}</p>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
         </div>
+        <!-- /.container-fluid -->
+    </section>
 
-        <div class="action">
-
-            <p>Nombre</p>
-
-            <p>$ 1000.00</p>
-
-            <button>Add to Cart</button>
-
-        </div>
-    
-
-    </div> 
 {% endblock contenido %}
